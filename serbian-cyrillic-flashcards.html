@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serbian Cyrillic Flash Cards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 60px 40px;
+            margin: 30px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+        }
+
+        .card-content {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card.flipped .card-content {
+            font-size: 2em;
+        }
+
+        .answer {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #666;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-show {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-again {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-hard {
+            background: #fd7e14;
+            color: white;
+        }
+
+        .btn-good {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-easy {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .progress {
+            margin-top: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .reset-btn {
+            margin-top: 20px;
+            background: #6c757d;
+            color: white;
+            font-size: 0.9em;
+            padding: 10px 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇷🇸 Serbian Cyrillic Flash Cards</h1>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="newCards">0</div>
+                <div class="stat-label">New</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="learningCards">0</div>
+                <div class="stat-label">Learning</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="reviewCards">0</div>
+                <div class="stat-label">Review</div>
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="card" id="card">
+            <div class="card-content" id="cardContent">А</div>
+            <div class="answer hidden" id="cardAnswer">
+                <strong>Latin:</strong> A<br>
+                <strong>Sound:</strong> /a/ (as in "father")
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-show" id="showBtn" onclick="showAnswer()">Show Answer</button>
+            
+            <div class="hidden" id="gradeButtons">
+                <button class="btn btn-again" onclick="gradeCard(0)">Again</button>
+                <button class="btn btn-hard" onclick="gradeCard(1)">Hard</button>
+                <button class="btn btn-good" onclick="gradeCard(2)">Good</button>
+                <button class="btn btn-easy" onclick="gradeCard(3)">Easy</button>
+            </div>
+        </div>
+
+        <button class="btn reset-btn" onclick="resetProgress()">Reset All Progress</button>
+    </div>
+
+    <script>
+        // Serbian Cyrillic alphabet data
+        const alphabet = [
+            { cyrillic: 'А', latin: 'A', sound: '/a/ (as in "father")' },
+            { cyrillic: 'Б', latin: 'B', sound: '/b/ (as in "book")' },
+            { cyrillic: 'В', latin: 'V', sound: '/v/ (as in "victory")' },
+            { cyrillic: 'Г', latin: 'G', sound: '/g/ (as in "go")' },
+            { cyrillic: 'Д', latin: 'D', sound: '/d/ (as in "dog")' },
+            { cyrillic: 'Ђ', latin: 'Đ', sound: '/dʑ/ (soft "dj")' },
+            { cyrillic: 'Е', latin: 'E', sound: '/e/ (as in "bed")' },
+            { cyrillic: 'Ж', latin: 'Ž', sound: '/ʒ/ (as in "measure")' },
+            { cyrillic: 'З', latin: 'Z', sound: '/z/ (as in "zebra")' },
+            { cyrillic: 'И', latin: 'I', sound: '/i/ (as in "machine")' },
+            { cyrillic: 'Ј', latin: 'J', sound: '/j/ (as in "yes")' },
+            { cyrillic: 'К', latin: 'K', sound: '/k/ (as in "king")' },
+            { cyrillic: 'Л', latin: 'L', sound: '/l/ (as in "love")' },
+            { cyrillic: 'Љ', latin: 'Lj', sound: '/ʎ/ (like "million")' },
+            { cyrillic: 'М', latin: 'M', sound: '/m/ (as in "mother")' },
+            { cyrillic: 'Н', latin: 'N', sound: '/n/ (as in "no")' },
+            { cyrillic: 'Њ', latin: 'Nj', sound: '/ɲ/ (like "canyon")' },
+            { cyrillic: 'О', latin: 'O', sound: '/o/ (as in "dog")' },
+            { cyrillic: 'П', latin: 'P', sound: '/p/ (as in "pen")' },
+            { cyrillic: 'Р', latin: 'R', sound: '/r/ (rolled R)' },
+            { cyrillic: 'С', latin: 'S', sound: '/s/ (as in "sun")' },
+            { cyrillic: 'Т', latin: 'T', sound: '/t/ (as in "top")' },
+            { cyrillic: 'Ћ', latin: 'Ć', sound: '/tɕ/ (soft "ch")' },
+            { cyrillic: 'У', latin: 'U', sound: '/u/ (as in "boot")' },
+            { cyrillic: 'Ф', latin: 'F', sound: '/f/ (as in "fun")' },
+            { cyrillic: 'Х', latin: 'H', sound: '/x/ (like German "ach")' },
+            { cyrillic: 'Ц', latin: 'C', sound: '/ts/ (as in "cats")' },
+            { cyrillic: 'Ч', latin: 'Č', sound: '/tʃ/ (as in "chair")' },
+            { cyrillic: 'Џ', latin: 'Dž', sound: '/dʒ/ (as in "judge")' },
+            { cyrillic: 'Ш', latin: 'Š', sound: '/ʃ/ (as in "shirt")' }
+        ];
+
+        // Anki SM-2 Algorithm implementation
+        class Card {
+            constructor(data, id) {
+                this.id = id;
+                this.data = data;
+                this.easeFactor = 2.5;
+                this.repetitions = 0;
+                this.interval = 1;
+                this.dueDate = new Date();
+                this.isNew = true;
+                this.isLearning = false;
+            }
+
+            grade(quality) {
+                if (this.isNew) {
+                    this.isNew = false;
+                    this.isLearning = true;
+                }
+
+                if (quality < 2) {
+                    this.repetitions = 0;
+                    this.interval = 1;
+                    this.isLearning = true;
+                } else {
+                    if (this.repetitions === 0) {
+                        this.interval = 1;
+                    } else if (this.repetitions === 1) {
+                        this.interval = 6;
+                    } else {
+                        this.interval = Math.round(this.interval * this.easeFactor);
+                    }
+
+                    this.repetitions++;
+                    this.easeFactor = this.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+                    
+                    if (this.easeFactor < 1.3) {
+                        this.easeFactor = 1.3;
+                    }
+
+                    if (this.repetitions > 1) {
+                        this.isLearning = false;
+                    }
+                }
+
+                this.dueDate = new Date();
+                this.dueDate.setDate(this.dueDate.getDate() + this.interval);
+                this.save();
+            }
+
+            isDue() {
+                return new Date() >= this.dueDate;
+            }
+
+            save() {
+                const cards = JSON.parse(localStorage.getItem('serbianCards') || '{}');
+                cards[this.id] = {
+                    easeFactor: this.easeFactor,
+                    repetitions: this.repetitions,
+                    interval: this.interval,
+                    dueDate: this.dueDate.toISOString(),
+                    isNew: this.isNew,
+                    isLearning: this.isLearning
+                };
+                localStorage.setItem('serbianCards', JSON.stringify(cards));
+            }
+
+            static load(data, id) {
+                const cards = JSON.parse(localStorage.getItem('serbianCards') || '{}');
+                const card = new Card(data, id);
+                
+                if (cards[id]) {
+                    const saved = cards[id];
+                    card.easeFactor = saved.easeFactor;
+                    card.repetitions = saved.repetitions;
+                    card.interval = saved.interval;
+                    card.dueDate = new Date(saved.dueDate);
+                    card.isNew = saved.isNew;
+                    card.isLearning = saved.isLearning;
+                }
+                
+                return card;
+            }
+        }
+
+        // Game state
+        let cards = [];
+        let currentCard = null;
+        let isShowingAnswer = false;
+
+        // Initialize cards
+        function initializeCards() {
+            cards = alphabet.map((data, index) => Card.load(data, index));
+        }
+
+        // Get next card to study
+        function getNextCard() {
+            const dueCards = cards.filter(card => card.isDue());
+            const newCards = dueCards.filter(card => card.isNew);
+            const learningCards = dueCards.filter(card => card.isLearning && !card.isNew);
+            const reviewCards = dueCards.filter(card => !card.isNew && !card.isLearning);
+
+            // Prioritize: learning cards, then new cards, then review cards
+            if (learningCards.length > 0) {
+                return learningCards[Math.floor(Math.random() * learningCards.length)];
+            } else if (newCards.length > 0) {
+                return newCards[Math.floor(Math.random() * newCards.length)];
+            } else if (reviewCards.length > 0) {
+                return reviewCards[Math.floor(Math.random() * reviewCards.length)];
+            }
+
+            return null;
+        }
+
+        // Update statistics
+        function updateStats() {
+            const dueCards = cards.filter(card => card.isDue());
+            const newCount = dueCards.filter(card => card.isNew).length;
+            const learningCount = dueCards.filter(card => card.isLearning && !card.isNew).length;
+            const reviewCount = dueCards.filter(card => !card.isNew && !card.isLearning).length;
+
+            document.getElementById('newCards').textContent = newCount;
+            document.getElementById('learningCards').textContent = learningCount;
+            document.getElementById('reviewCards').textContent = reviewCount;
+
+            const totalStudied = cards.filter(card => !card.isNew).length;
+            const progress = (totalStudied / cards.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Show next card
+        function showNextCard() {
+            currentCard = getNextCard();
+            
+            if (!currentCard) {
+                document.getElementById('cardContent').textContent = '🎉 All done for now!';
+                document.getElementById('cardAnswer').classList.add('hidden');
+                document.getElementById('showBtn').classList.add('hidden');
+                document.getElementById('gradeButtons').classList.add('hidden');
+                return;
+            }
+
+            document.getElementById('cardContent').textContent = currentCard.data.cyrillic;
+            document.getElementById('cardAnswer').innerHTML = 
+                `<strong>Latin:</strong> ${currentCard.data.latin}<br>
+                 <strong>Sound:</strong> ${currentCard.data.sound}`;
+            document.getElementById('cardAnswer').classList.add('hidden');
+            document.getElementById('card').classList.remove('flipped');
+            
+            document.getElementById('showBtn').classList.remove('hidden');
+            document.getElementById('gradeButtons').classList.add('hidden');
+            
+            isShowingAnswer = false;
+        }
+
+        // Show answer
+        function showAnswer() {
+            document.getElementById('cardAnswer').classList.remove('hidden');
+            document.getElementById('card').classList.add('flipped');
+            document.getElementById('showBtn').classList.add('hidden');
+            document.getElementById('gradeButtons').classList.remove('hidden');
+            isShowingAnswer = true;
+        }
+
+        // Grade card
+        function gradeCard(quality) {
+            if (!isShowingAnswer) return;
+            
+            currentCard.grade(quality);
+            updateStats();
+            showNextCard();
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+                localStorage.removeItem('serbianCards');
+                initializeCards();
+                updateStats();
+                showNextCard();
+            }
+        }
+
+        // Initialize app
+        initializeCards();
+        updateStats();
+        showNextCard();
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!isShowingAnswer && e.code === 'Space') {
+                e.preventDefault();
+                showAnswer();
+            } else if (isShowingAnswer) {
+                switch(e.key) {
+                    case '1':
+                        gradeCard(0);
+                        break;
+                    case '2':
+                        gradeCard(1);
+                        break;
+                    case '3':
+                        gradeCard(2);
+                        break;
+                    case '4':
+                        gradeCard(3);
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
