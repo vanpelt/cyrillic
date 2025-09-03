@@ -383,6 +383,115 @@
             { cyrillic: 'Ш', latin: 'Š', sound: '/ʃ/ (as in "shirt")' }
         ];
 
+        // 100 common Serbian words
+        const commonWords = [
+            { cyrillic: 'бити', latin: 'biti', meaning: 'to be' },
+            { cyrillic: 'имати', latin: 'imati', meaning: 'to have' },
+            { cyrillic: 'моћи', latin: 'moći', meaning: 'to be able to' },
+            { cyrillic: 'рећи', latin: 'reći', meaning: 'to say' },
+            { cyrillic: 'хтети', latin: 'hteti', meaning: 'to want' },
+            { cyrillic: 'доћи', latin: 'doći', meaning: 'to come' },
+            { cyrillic: 'ићи', latin: 'ići', meaning: 'to go' },
+            { cyrillic: 'знати', latin: 'znati', meaning: 'to know' },
+            { cyrillic: 'видети', latin: 'videti', meaning: 'to see' },
+            { cyrillic: 'дати', latin: 'dati', meaning: 'to give' },
+            { cyrillic: 'човек', latin: 'čovek', meaning: 'person, man' },
+            { cyrillic: 'жена', latin: 'žena', meaning: 'woman' },
+            { cyrillic: 'дете', latin: 'dete', meaning: 'child' },
+            { cyrillic: 'кућа', latin: 'kuća', meaning: 'house' },
+            { cyrillic: 'вода', latin: 'voda', meaning: 'water' },
+            { cyrillic: 'земља', latin: 'zemlja', meaning: 'earth, country' },
+            { cyrillic: 'небо', latin: 'nebo', meaning: 'sky' },
+            { cyrillic: 'сунце', latin: 'sunce', meaning: 'sun' },
+            { cyrillic: 'месец', latin: 'mesec', meaning: 'moon, month' },
+            { cyrillic: 'дан', latin: 'dan', meaning: 'day' },
+            { cyrillic: 'ноћ', latin: 'noć', meaning: 'night' },
+            { cyrillic: 'време', latin: 'vreme', meaning: 'time, weather' },
+            { cyrillic: 'година', latin: 'godina', meaning: 'year' },
+            { cyrillic: 'место', latin: 'mesto', meaning: 'place' },
+            { cyrillic: 'рука', latin: 'ruka', meaning: 'hand, arm' },
+            { cyrillic: 'нога', latin: 'noga', meaning: 'leg, foot' },
+            { cyrillic: 'глава', latin: 'glava', meaning: 'head' },
+            { cyrillic: 'око', latin: 'oko', meaning: 'eye' },
+            { cyrillic: 'срце', latin: 'srce', meaning: 'heart' },
+            { cyrillic: 'љубав', latin: 'ljubav', meaning: 'love' },
+            { cyrillic: 'пријатељ', latin: 'prijatelj', meaning: 'friend' },
+            { cyrillic: 'породица', latin: 'porodica', meaning: 'family' },
+            { cyrillic: 'брат', latin: 'brat', meaning: 'brother' },
+            { cyrillic: 'сестра', latin: 'sestra', meaning: 'sister' },
+            { cyrillic: 'отац', latin: 'otac', meaning: 'father' },
+            { cyrillic: 'мајка', latin: 'majka', meaning: 'mother' },
+            { cyrillic: 'син', latin: 'sin', meaning: 'son' },
+            { cyrillic: 'кћерка', latin: 'kćerka', meaning: 'daughter' },
+            { cyrillic: 'школа', latin: 'škola', meaning: 'school' },
+            { cyrillic: 'књига', latin: 'knjiga', meaning: 'book' },
+            { cyrillic: 'писати', latin: 'pisati', meaning: 'to write' },
+            { cyrillic: 'читати', latin: 'čitati', meaning: 'to read' },
+            { cyrillic: 'учити', latin: 'učiti', meaning: 'to learn' },
+            { cyrillic: 'радити', latin: 'raditi', meaning: 'to work' },
+            { cyrillic: 'играти', latin: 'igrati', meaning: 'to play' },
+            { cyrillic: 'певати', latin: 'pevati', meaning: 'to sing' },
+            { cyrillic: 'спавати', latin: 'spavati', meaning: 'to sleep' },
+            { cyrillic: 'јести', latin: 'jesti', meaning: 'to eat' },
+            { cyrillic: 'пити', latin: 'piti', meaning: 'to drink' },
+            { cyrillic: 'говорити', latin: 'govoriti', meaning: 'to speak' },
+            { cyrillic: 'слушати', latin: 'slušati', meaning: 'to listen' },
+            { cyrillic: 'мислити', latin: 'misliti', meaning: 'to think' },
+            { cyrillic: 'осећати', latin: 'osećati', meaning: 'to feel' },
+            { cyrillic: 'волети', latin: 'voleti', meaning: 'to love' },
+            { cyrillic: 'живети', latin: 'živeti', meaning: 'to live' },
+            { cyrillic: 'умрети', latin: 'umreti', meaning: 'to die' },
+            { cyrillic: 'рођење', latin: 'rođenje', meaning: 'birth' },
+            { cyrillic: 'живот', latin: 'život', meaning: 'life' },
+            { cyrillic: 'смрт', latin: 'smrt', meaning: 'death' },
+            { cyrillic: 'срећа', latin: 'sreća', meaning: 'happiness' },
+            { cyrillic: 'туга', latin: 'tuga', meaning: 'sadness' },
+            { cyrillic: 'страх', latin: 'strah', meaning: 'fear' },
+            { cyrillic: 'нада', latin: 'nada', meaning: 'hope' },
+            { cyrillic: 'мир', latin: 'mir', meaning: 'peace' },
+            { cyrillic: 'рат', latin: 'rat', meaning: 'war' },
+            { cyrillic: 'здравље', latin: 'zdravlje', meaning: 'health' },
+            { cyrillic: 'болест', latin: 'bolest', meaning: 'illness' },
+            { cyrillic: 'лекар', latin: 'lekar', meaning: 'doctor' },
+            { cyrillic: 'болница', latin: 'bolnica', meaning: 'hospital' },
+            { cyrillic: 'лек', latin: 'lek', meaning: 'medicine' },
+            { cyrillic: 'храна', latin: 'hrana', meaning: 'food' },
+            { cyrillic: 'хлеб', latin: 'hleb', meaning: 'bread' },
+            { cyrillic: 'месо', latin: 'meso', meaning: 'meat' },
+            { cyrillic: 'риба', latin: 'riba', meaning: 'fish' },
+            { cyrillic: 'воће', latin: 'voće', meaning: 'fruit' },
+            { cyrillic: 'поврће', latin: 'povrće', meaning: 'vegetables' },
+            { cyrillic: 'млеко', latin: 'mleko', meaning: 'milk' },
+            { cyrillic: 'јаје', latin: 'jaje', meaning: 'egg' },
+            { cyrillic: 'сир', latin: 'sir', meaning: 'cheese' },
+            { cyrillic: 'шећер', latin: 'šećer', meaning: 'sugar' },
+            { cyrillic: 'со', latin: 'so', meaning: 'salt' },
+            { cyrillic: 'кафа', latin: 'kafa', meaning: 'coffee' },
+            { cyrillic: 'чај', latin: 'čaj', meaning: 'tea' },
+            { cyrillic: 'пиво', latin: 'pivo', meaning: 'beer' },
+            { cyrillic: 'вино', latin: 'vino', meaning: 'wine' },
+            { cyrillic: 'аутомобил', latin: 'automobil', meaning: 'car' },
+            { cyrillic: 'воз', latin: 'voz', meaning: 'train' },
+            { cyrillic: 'авион', latin: 'avion', meaning: 'airplane' },
+            { cyrillic: 'брод', latin: 'brod', meaning: 'ship' },
+            { cyrillic: 'бицикл', latin: 'bicikl', meaning: 'bicycle' },
+            { cyrillic: 'пут', latin: 'put', meaning: 'road, journey' },
+            { cyrillic: 'град', latin: 'grad', meaning: 'city' },
+            { cyrillic: 'село', latin: 'selo', meaning: 'village' },
+            { cyrillic: 'река', latin: 'reka', meaning: 'river' },
+            { cyrillic: 'море', latin: 'more', meaning: 'sea' },
+            { cyrillic: 'планина', latin: 'planina', meaning: 'mountain' },
+            { cyrillic: 'шума', latin: 'šuma', meaning: 'forest' },
+            { cyrillic: 'дрво', latin: 'drvo', meaning: 'tree' },
+            { cyrillic: 'цвет', latin: 'cvet', meaning: 'flower' },
+            { cyrillic: 'трава', latin: 'trava', meaning: 'grass' },
+            { cyrillic: 'животиња', latin: 'životinja', meaning: 'animal' },
+            { cyrillic: 'пас', latin: 'pas', meaning: 'dog' },
+            { cyrillic: 'мачка', latin: 'mačka', meaning: 'cat' },
+            { cyrillic: 'коњ', latin: 'konj', meaning: 'horse' },
+            { cyrillic: 'птица', latin: 'ptica', meaning: 'bird' }
+        ];
+
         // Anki SM-2 Algorithm implementation
         class Card {
             constructor(data, id) {
@@ -471,10 +580,34 @@
         let cards = [];
         let currentCard = null;
         let isShowingAnswer = false;
+        let wordsMode = false;
+
+        // Settings management
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('serbianSettings') || '{}');
+            wordsMode = settings.wordsMode || false;
+            updateSettingsUI();
+        }
+
+        function saveSettings() {
+            const settings = { wordsMode };
+            localStorage.setItem('serbianSettings', JSON.stringify(settings));
+        }
+
+        function updateSettingsUI() {
+            const toggle = document.getElementById('wordsToggle');
+            if (wordsMode) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+            }
+        }
 
         // Initialize cards
         function initializeCards() {
-            cards = alphabet.map((data, index) => Card.load(data, index));
+            const dataSource = wordsMode ? commonWords : alphabet;
+            const storageKey = wordsMode ? 'serbianWordsCards' : 'serbianCards';
+            cards = dataSource.map((data, index) => Card.load(data, index, storageKey));
         }
 
         // Get next card to study
