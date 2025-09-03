@@ -546,7 +546,8 @@
             }
 
             save() {
-                const cards = JSON.parse(localStorage.getItem('serbianCards') || '{}');
+                const storageKey = this.storageKey || 'serbianCards';
+                const cards = JSON.parse(localStorage.getItem(storageKey) || '{}');
                 cards[this.id] = {
                     easeFactor: this.easeFactor,
                     repetitions: this.repetitions,
@@ -555,12 +556,13 @@
                     isNew: this.isNew,
                     isLearning: this.isLearning
                 };
-                localStorage.setItem('serbianCards', JSON.stringify(cards));
+                localStorage.setItem(storageKey, JSON.stringify(cards));
             }
 
-            static load(data, id) {
-                const cards = JSON.parse(localStorage.getItem('serbianCards') || '{}');
+            static load(data, id, storageKey = 'serbianCards') {
+                const cards = JSON.parse(localStorage.getItem(storageKey) || '{}');
                 const card = new Card(data, id);
+                card.storageKey = storageKey;
                 
                 if (cards[id]) {
                     const saved = cards[id];
