@@ -166,12 +166,123 @@
             padding: 10px 20px;
         }
 
+        .settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #6c757d;
+            color: white;
+            font-size: 0.9em;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .settings-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .settings-modal {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .settings-title {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .setting-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle.active .toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .settings-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .settings-buttons .btn {
+            flex: 1;
+        }
+
         .hidden {
             display: none;
         }
     </style>
 </head>
 <body>
+    <button class="settings-btn" onclick="openSettings()">⚙️ Settings</button>
+    
     <div class="container">
         <h1>🇷🇸 Serbian Cyrillic Flash Cards</h1>
         
@@ -214,6 +325,27 @@
         </div>
 
         <button class="btn reset-btn" onclick="resetProgress()">Reset All Progress</button>
+    </div>
+
+    <!-- Settings Screen -->
+    <div class="settings-screen hidden" id="settingsScreen">
+        <div class="settings-modal">
+            <h2 class="settings-title">Settings</h2>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Words Mode</div>
+                    <div class="setting-description">Show common Serbian words instead of individual characters</div>
+                </div>
+                <div class="toggle" id="wordsToggle" onclick="toggleWords()">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+
+            <div class="settings-buttons">
+                <button class="btn btn-good" onclick="closeSettings()">Done</button>
+            </div>
+        </div>
     </div>
 
     <script>
