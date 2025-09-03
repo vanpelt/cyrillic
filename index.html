@@ -660,9 +660,17 @@
             }
 
             document.getElementById('cardContent').textContent = currentCard.data.cyrillic;
-            document.getElementById('cardAnswer').innerHTML = 
-                `<strong>Latin:</strong> ${currentCard.data.latin}<br>
-                 <strong>Sound:</strong> ${currentCard.data.sound}`;
+            
+            let answerHtml;
+            if (wordsMode) {
+                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
+                             <strong>Meaning:</strong> ${currentCard.data.meaning}`;
+            } else {
+                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
+                             <strong>Sound:</strong> ${currentCard.data.sound}`;
+            }
+            
+            document.getElementById('cardAnswer').innerHTML = answerHtml;
             document.getElementById('cardAnswer').classList.add('hidden');
             document.getElementById('card').classList.remove('flipped');
             
@@ -694,13 +702,33 @@
         function resetProgress() {
             if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
                 localStorage.removeItem('serbianCards');
+                localStorage.removeItem('serbianWordsCards');
                 initializeCards();
                 updateStats();
                 showNextCard();
             }
         }
 
+        // Settings functions
+        function openSettings() {
+            document.getElementById('settingsScreen').classList.remove('hidden');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsScreen').classList.add('hidden');
+        }
+
+        function toggleWords() {
+            wordsMode = !wordsMode;
+            saveSettings();
+            updateSettingsUI();
+            initializeCards();
+            updateStats();
+            showNextCard();
+        }
+
         // Initialize app
+        loadSettings();
         initializeCards();
         updateStats();
         showNextCard();
