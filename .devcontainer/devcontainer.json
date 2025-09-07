@@ -4,7 +4,8 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers-contrib/features/uv:1": {}
+    "ghcr.io/devcontainers-contrib/features/uv:1": {},
+    "ghcr.io/wandb/catnip/feature:0.1": {}
   },
   "customizations": {
     "vscode": {
