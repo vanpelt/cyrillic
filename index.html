@@ -61,7 +61,7 @@
         <div class="flex gap-4 justify-center mt-8 flex-wrap max-[480px]:gap-2.5 max-[480px]:mt-5">
             <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-cyan-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
-            <div class="hidden gap-4 max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:gap-2.5 max-[480px]:w-full" id="gradeButtons">
+            <div class="hidden gap-4" id="gradeButtons">
                 <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(0)">Again</button>
                 <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(1)">Hard</button>
                 <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(2)">Good</button>
@@ -430,8 +430,11 @@
             document.getElementById('cardAnswer').classList.remove('hidden');
             document.getElementById('card').classList.add('flipped');
             document.getElementById('showBtn').classList.add('hidden');
-            document.getElementById('gradeButtons').classList.remove('hidden');
-            document.getElementById('gradeButtons').classList.add('flex');
+            const gradeButtons = document.getElementById('gradeButtons');
+            gradeButtons.classList.remove('hidden');
+            gradeButtons.classList.add('flex');
+            // Add mobile-specific classes when showing buttons
+            gradeButtons.classList.add('max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
             isShowingAnswer = true;
         }
 
