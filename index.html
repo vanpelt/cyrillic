@@ -6,379 +6,89 @@
     <title>Cyrillinki</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇷🇸</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    backgroundImage: {
+                        'gradient-main': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        'gradient-progress': 'linear-gradient(90deg, #667eea, #764ba2)'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            padding: 40px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 60px 40px;
-            margin: 30px 0;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: #667eea;
-        }
-
-        .card-content {
-            font-size: 4em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .card.flipped .card-content {
-            font-size: 2em;
-        }
-
-        .answer {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 100px;
-        }
-
-        @media (max-width: 480px) {
-            .buttons {
-                gap: 10px;
-                margin-top: 20px;
-            }
-            
-            .btn {
-                padding: 12px 16px;
-                font-size: 0.9em;
-                min-width: 70px;
-                flex: 1;
-            }
-            
-            #gradeButtons {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                width: 100%;
-            }
-            
-            .container {
-                padding: 30px 20px;
-            }
-            
-            .card {
-                padding: 40px 20px;
-                min-height: 160px;
-            }
-            
-            .card-content {
-                font-size: 3em;
-            }
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-show {
-            background: #17a2b8;
-            color: white;
-        }
-
-        .btn-again {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-hard {
-            background: #fd7e14;
-            color: white;
-        }
-
-        .btn-good {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-easy {
-            background: #6f42c1;
-            color: white;
-        }
-
-        .progress {
-            margin-top: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-
-        .reset-btn {
-            margin-top: 20px;
-            background: #6c757d;
-            color: white;
-            font-size: 0.9em;
-            padding: 10px 20px;
-        }
-
-        .settings-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 5px;
-        }
-
-        .settings-btn:hover {
-            transform: scale(1.2);
-            opacity: 0.7;
-        }
-
-        .settings-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .settings-modal {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .settings-title {
-            font-size: 1.5em;
-            margin-bottom: 25px;
-            color: #333;
-            text-align: center;
-        }
-
-        .setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .setting-label {
-            font-weight: 500;
-            color: #333;
-        }
-
-        .setting-description {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .toggle {
-            position: relative;
-            width: 50px;
-            height: 24px;
-            background: #ccc;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .toggle.active {
-            background: #667eea;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
+        /* Only keep styles that can't be replaced with Tailwind */
         .toggle.active .toggle-slider {
             transform: translateX(26px);
         }
-
-        .settings-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 25px;
-        }
-
-        .settings-buttons .btn {
-            flex: 1;
-        }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
-<body>
-    <button class="settings-btn" onclick="openSettings()">⚙️</button>
+<body class="font-sans bg-gradient-main min-h-screen flex justify-center items-center p-5">
+    <button class="absolute top-5 right-5 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
     
-    <div class="container">
-        <h1>🇷🇸 Cyrillinki</h1>
+    <div class="bg-white rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] max-w-[500px] w-full p-10 text-center">
+        <h1 class="text-gray-800 mb-8 text-3xl">🇷🇸 Cyrillinki</h1>
         
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value" id="newCards">0</div>
-                <div class="stat-label">New</div>
+        <div class="flex justify-around mb-8 p-5 bg-gray-100 rounded-[10px]">
+            <div class="text-center">
+                <div class="text-2xl font-bold text-[#667eea]" id="newCards">0</div>
+                <div class="text-sm text-gray-600 mt-1" id="newCards">New</div>
             </div>
-            <div class="stat">
-                <div class="stat-value" id="learningCards">0</div>
-                <div class="stat-label">Learning</div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-[#667eea]" id="learningCards">0</div>
+                <div class="text-sm text-gray-600 mt-1">Learning</div>
             </div>
-            <div class="stat">
-                <div class="stat-value" id="reviewCards">0</div>
-                <div class="stat-label">Review</div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-[#667eea]" id="reviewCards">0</div>
+                <div class="text-sm text-gray-600 mt-1">Review</div>
             </div>
         </div>
 
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="mt-5 bg-gray-200 rounded-[10px] overflow-hidden">
+            <div class="h-1.5 bg-gradient-progress transition-[width] duration-300 ease-in-out" id="progressBar"></div>
         </div>
 
-        <div class="card" id="card">
-            <div class="card-content" id="cardContent">А</div>
-            <div class="answer hidden" id="cardAnswer">
+        <div class="bg-gray-100 rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 border-gray-200 transition-all duration-300 hover:border-[#667eea]" id="card">
+            <div class="text-[4em] font-bold text-gray-800 [.flipped_&]:text-[2em]" id="cardContent">А</div>
+            <div class="hidden mt-5 text-2xl text-gray-600 leading-[1.8]" id="cardAnswer">
                 <strong>Latin:</strong> A<br>
                 <strong>Sound:</strong> /a/ (as in "father")
             </div>
         </div>
 
-        <div class="buttons">
-            <button class="btn btn-show" id="showBtn" onclick="showAnswer()">Show Answer</button>
+        <div class="flex gap-4 justify-center mt-8 flex-wrap max-[480px]:gap-2.5 max-[480px]:mt-5">
+            <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-cyan-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
-            <div class="hidden" id="gradeButtons">
-                <button class="btn btn-again" onclick="gradeCard(0)">Again</button>
-                <button class="btn btn-hard" onclick="gradeCard(1)">Hard</button>
-                <button class="btn btn-good" onclick="gradeCard(2)">Good</button>
-                <button class="btn btn-easy" onclick="gradeCard(3)">Easy</button>
+            <div class="hidden gap-4 max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:gap-2.5 max-[480px]:w-full" id="gradeButtons">
+                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(0)">Again</button>
+                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(1)">Hard</button>
+                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(2)">Good</button>
+                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(3)">Easy</button>
             </div>
         </div>
 
-        <button class="btn reset-btn" onclick="resetProgress()">Reset All Progress</button>
+        <button class="mt-5 bg-gray-600 text-white text-sm px-5 py-2.5 border-0 rounded-[10px] font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="resetProgress()">Reset All Progress</button>
     </div>
 
     <!-- Settings Screen -->
-    <div class="settings-screen hidden" id="settingsScreen">
-        <div class="settings-modal">
-            <h2 class="settings-title">Settings</h2>
+    <div class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-[1000]" id="settingsScreen">
+        <div class="bg-white rounded-[15px] p-8 max-w-[400px] w-[90%] shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+            <h2 class="text-2xl mb-6 text-gray-800 text-center">Settings</h2>
             
-            <div class="setting-item">
+            <div class="flex justify-between items-center mb-5 p-4 bg-gray-100 rounded-[10px]">
                 <div>
-                    <div class="setting-label">Words Mode</div>
-                    <div class="setting-description">Show common Serbian words instead of individual characters</div>
+                    <div class="font-medium text-gray-800">Words Mode</div>
+                    <div class="text-sm text-gray-600 mt-1">Show common Serbian words instead of individual characters</div>
                 </div>
-                <div class="toggle" id="wordsToggle" onclick="toggleWords()">
-                    <div class="toggle-slider"></div>
+                <div class="relative w-[50px] h-6 bg-gray-400 rounded-full cursor-pointer transition-colors duration-300 [&.active]:bg-[#667eea] toggle" id="wordsToggle" onclick="toggleWords()">
+                    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
                 </div>
             </div>
 
-            <div class="settings-buttons">
-                <button class="btn btn-good" onclick="closeSettings()">Done</button>
+            <div class="flex gap-2.5 justify-center mt-6">
+                <button class="flex-1 px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="closeSettings()">Done</button>
             </div>
         </div>
     </div>
@@ -721,6 +431,7 @@
             document.getElementById('card').classList.add('flipped');
             document.getElementById('showBtn').classList.add('hidden');
             document.getElementById('gradeButtons').classList.remove('hidden');
+            document.getElementById('gradeButtons').classList.add('flex');
             isShowingAnswer = true;
         }
 
