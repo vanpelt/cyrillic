@@ -1,0 +1,24 @@
+{
+  "name": "Cyrillinki - Serbian Cyrillic Learning",
+  "short_name": "Cyrillinki",
+  "description": "Learn Serbian Cyrillic alphabet and common words with spaced repetition",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23667eea' rx='38'/><text x='96' y='134' font-size='115' text-anchor='middle'>🇷🇸</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23667eea' rx='102'/><text x='256' y='358' font-size='307' text-anchor='middle'>🇷🇸</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "en"
+}
