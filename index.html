@@ -109,34 +109,34 @@
         }
     </style>
 </head>
-<body class="font-sans bg-gradient-main dark:bg-gradient-main-dark min-h-screen flex justify-center items-center p-5 overflow-hidden touch-none transition-colors duration-300">
-    <div class="bg-white dark:bg-slate-800 rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.3)] max-w-[500px] w-full p-10 text-center max-h-screen overflow-y-auto overscroll-none mt-8 safe-area-inset-top transition-colors duration-300">
+<body class="font-sans min-h-screen flex justify-center items-center p-5 overflow-hidden touch-none transition-colors duration-300" style="background: var(--bg-primary);">
+    <div class="rounded-[20px] max-w-[500px] w-full p-10 text-center max-h-screen overflow-y-auto overscroll-none mt-8 safe-area-inset-top transition-colors duration-300" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
         <div class="relative mb-8">
-            <h1 class="text-gray-800 dark:text-gray-200 text-3xl text-center">🇷🇸 Cyrillinki</h1>
+            <h1 class="text-3xl text-center" style="color: var(--text-primary);">🇷🇸 Cyrillinki</h1>
             <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
         </div>
         
-        <div class="relative mb-8 bg-gray-100 dark:bg-slate-700 rounded-[10px] transition-colors duration-300 overflow-hidden">
+        <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
             <div class="flex justify-around p-5">
                 <div class="text-center">
-                    <div class="text-2xl font-bold text-[#667eea]" id="newCards">0</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">New</div>
+                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="newCards">0</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">New</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl font-bold text-[#667eea]" id="learningCards">0</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Learning</div>
+                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="learningCards">0</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">Learning</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl font-bold text-[#667eea]" id="reviewCards">0</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Review</div>
+                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="reviewCards">0</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review</div>
                 </div>
             </div>
             <!-- Progress bar as bottom border -->
-            <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-200 dark:bg-slate-600">
-                <div class="h-full bg-gradient-progress dark:bg-gradient-progress-dark transition-[width] duration-300 ease-in-out" id="progressBar"></div>
+            <div class="absolute bottom-0 left-0 w-full h-1" style="background: var(--progress-bg);">
+                <div class="h-full transition-[width] duration-300 ease-in-out" style="background: var(--progress-fill);" id="progressBar"></div>
             </div>
         </div>
-        <div class="text-xs text-center -mt-6 mb-6 text-gray-600 dark:text-gray-400" id="progressText">0% mastered</div>
+        <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
         <div class="bg-gray-100 dark:bg-slate-700 rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 border-gray-200 dark:border-slate-600 transition-all duration-300 hover:border-[#667eea] dark:hover:border-[#475569]" id="card">
             <div class="text-[4em] font-bold text-gray-800 dark:text-gray-200 [.flipped_&]:text-[2em]" id="cardContent">А</div>
