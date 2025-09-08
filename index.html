@@ -42,25 +42,27 @@
             <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
         </div>
         
-        <div class="flex justify-around mb-8 p-5 bg-gray-100 dark:bg-slate-700 rounded-[10px] transition-colors duration-300">
-            <div class="text-center">
-                <div class="text-2xl font-bold text-[#667eea]" id="newCards">0</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400 mt-1" id="newCards">New</div>
+        <div class="relative mb-8 bg-gray-100 dark:bg-slate-700 rounded-[10px] transition-colors duration-300 overflow-hidden">
+            <div class="flex justify-around p-5">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-[#667eea]" id="newCards">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">New</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-[#667eea]" id="learningCards">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Learning</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-[#667eea]" id="reviewCards">0</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Review</div>
+                </div>
             </div>
-            <div class="text-center">
-                <div class="text-2xl font-bold text-[#667eea]" id="learningCards">0</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Learning</div>
-            </div>
-            <div class="text-center">
-                <div class="text-2xl font-bold text-[#667eea]" id="reviewCards">0</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Review</div>
+            <!-- Progress bar as bottom border -->
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-200 dark:bg-slate-600">
+                <div class="h-full bg-gradient-progress dark:bg-gradient-progress-dark transition-[width] duration-300 ease-in-out" id="progressBar"></div>
             </div>
         </div>
-
-        <div class="mt-5 bg-gray-200 dark:bg-slate-600 rounded-[10px] overflow-hidden transition-colors duration-300">
-            <div class="h-1.5 bg-gradient-progress dark:bg-gradient-progress-dark transition-[width] duration-300 ease-in-out" id="progressBar"></div>
-        </div>
-        <div class="text-xs text-center mt-2 text-gray-600 dark:text-gray-400" id="progressText">0% mastered</div>
+        <div class="text-xs text-center -mt-6 mb-6 text-gray-600 dark:text-gray-400" id="progressText">0% mastered</div>
 
         <div class="bg-gray-100 dark:bg-slate-700 rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 border-gray-200 dark:border-slate-600 transition-all duration-300 hover:border-[#667eea] dark:hover:border-[#475569]" id="card">
             <div class="text-[4em] font-bold text-gray-800 dark:text-gray-200 [.flipped_&]:text-[2em]" id="cardContent">А</div>
