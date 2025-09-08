@@ -513,6 +513,15 @@
             // Update progress bar to show mastery progress
             document.getElementById('progressBar').style.width = stats.masteryProgress + '%';
             document.getElementById('progressText').textContent = `${stats.masteryProgress}% mastered`;
+            
+            // Update detailed statistics in settings
+            document.getElementById('statsTotalCards').textContent = stats.totalCards;
+            document.getElementById('statsStudiedCards').textContent = stats.studiedCards;
+            document.getElementById('statsMatureCards').textContent = stats.matureCards;
+            document.getElementById('statsYoungCards').textContent = stats.youngCards;
+            document.getElementById('statsAverageEase').textContent = stats.averageEase.toFixed(2);
+            document.getElementById('statsRetentionRate').textContent = stats.retentionRate + '%';
+            document.getElementById('statsMasteryProgress').textContent = stats.masteryProgress + '%';
         }
 
         // Show next card
