@@ -15,17 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    backgroundImage: {
-                        'gradient-main': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        'gradient-progress': 'linear-gradient(90deg, #667eea, #764ba2)',
-                        'gradient-main-dark': 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
-                        'gradient-progress-dark': 'linear-gradient(90deg, #475569, #64748b)'
-                    }
-                }
-            }
+            darkMode: 'class'
         }
     </script>
     <style>
@@ -94,6 +84,10 @@
         /* Only keep styles that can't be replaced with Tailwind */
         .toggle.active .toggle-slider {
             transform: translateX(26px);
+        }
+        
+        .toggle.active {
+            background: var(--accent-primary) !important;
         }
 
         /* Progress bar animation for vibe theme */
@@ -181,60 +175,60 @@
                 </select>
             </div>
             
-            <div class="flex justify-between items-center mb-5 p-4 bg-gray-100 dark:bg-slate-700 rounded-[10px] transition-colors duration-300">
+            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
                 <div>
-                    <div class="font-medium text-gray-800 dark:text-gray-200">Words Mode</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Show common Serbian words instead of individual characters</div>
+                    <div class="font-medium" style="color: var(--text-primary);">Words Mode</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">Show common Serbian words instead of individual characters</div>
                 </div>
-                <div class="relative w-[50px] h-6 bg-gray-400 rounded-full cursor-pointer transition-colors duration-300 [&.active]:bg-[#667eea] toggle" id="wordsToggle" onclick="toggleWords()">
+                <div class="relative w-[50px] h-6 rounded-full cursor-pointer transition-colors duration-300 toggle" style="background: var(--text-muted);" id="wordsToggle" onclick="toggleWords()">
                     <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
                 </div>
             </div>
 
             <!-- Detailed Statistics -->
-            <div class="mb-6 p-4 bg-gray-100 dark:bg-slate-700 rounded-[10px] transition-colors duration-300">
-                <h3 class="font-medium text-gray-800 dark:text-gray-200 mb-3">Learning Statistics</h3>
+            <div class="mb-6 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
+                <h3 class="font-medium mb-3" style="color: var(--text-primary);">Learning Statistics</h3>
                 <div class="space-y-3 text-sm">
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Total Cards:</span>
-                        <span class="text-gray-800 dark:text-gray-200 font-medium" id="statsTotalCards">0</span>
+                        <span style="color: var(--text-muted);">Total Cards:</span>
+                        <span class="font-medium" style="color: var(--text-primary);" id="statsTotalCards">0</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Studied Cards:</span>
-                        <span class="text-gray-800 dark:text-gray-200 font-medium" id="statsStudiedCards">0</span>
+                        <span style="color: var(--text-muted);">Studied Cards:</span>
+                        <span class="font-medium" style="color: var(--text-primary);" id="statsStudiedCards">0</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Mature Cards (21+ days):</span>
-                        <span class="text-green-600 dark:text-green-400 font-medium" id="statsMatureCards">0</span>
+                        <span style="color: var(--text-muted);">Mature Cards (21+ days):</span>
+                        <span class="font-medium" style="color: var(--accent-secondary);" id="statsMatureCards">0</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Young Cards (&lt;21 days):</span>
-                        <span class="text-blue-600 dark:text-blue-400 font-medium" id="statsYoungCards">0</span>
+                        <span style="color: var(--text-muted);">Young Cards (&lt;21 days):</span>
+                        <span class="font-medium" style="color: var(--accent-primary);" id="statsYoungCards">0</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Average Ease Factor:</span>
-                        <span class="text-gray-800 dark:text-gray-200 font-medium" id="statsAverageEase">2.50</span>
+                        <span style="color: var(--text-muted);">Average Ease Factor:</span>
+                        <span class="font-medium" style="color: var(--text-primary);" id="statsAverageEase">2.50</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600 dark:text-gray-400">Retention Rate:</span>
-                        <span class="text-purple-600 dark:text-purple-400 font-medium" id="statsRetentionRate">100%</span>
+                        <span style="color: var(--text-muted);">Retention Rate:</span>
+                        <span class="font-medium" style="color: var(--accent-secondary);" id="statsRetentionRate">100%</span>
                     </div>
-                    <div class="flex justify-between border-t border-gray-300 dark:border-slate-600 pt-2 mt-2">
-                        <span class="text-gray-600 dark:text-gray-400 font-medium">Mastery Progress:</span>
-                        <span class="text-[#667eea] font-bold" id="statsMasteryProgress">0%</span>
+                    <div class="flex justify-between pt-2 mt-2" style="border-top: 1px solid var(--border-color);">
+                        <span class="font-medium" style="color: var(--text-muted);">Mastery Progress:</span>
+                        <span class="font-bold" style="color: var(--accent-primary);" id="statsMasteryProgress">0%</span>
                     </div>
                 </div>
             </div>
             
             <!-- Reset Progress Button -->
             <div class="px-8 pb-4">
-                <button class="w-full bg-red-600 text-white text-sm px-5 py-3 border-0 rounded-[10px] font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:bg-red-700" onclick="resetProgress()">Reset All Progress</button>
+                <button class="w-full text-white text-sm px-5 py-3 border-0 rounded-[10px] font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: #dc2626;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'" onclick="resetProgress()">Reset All Progress</button>
             </div>
             </div>
 
             <!-- Fixed Done Button -->
-            <div class="p-8 pt-4 border-t border-gray-200 dark:border-slate-600">
-                <button class="w-full px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="closeSettings()">Done</button>
+            <div class="p-8 pt-4" style="border-top: 1px solid var(--border-color);">
+                <button class="w-full px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: var(--accent-secondary);" onclick="closeSettings()">Done</button>
             </div>
         </div>
     </div>
