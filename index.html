@@ -60,6 +60,7 @@
         <div class="mt-5 bg-gray-200 dark:bg-slate-600 rounded-[10px] overflow-hidden transition-colors duration-300">
             <div class="h-1.5 bg-gradient-progress dark:bg-gradient-progress-dark transition-[width] duration-300 ease-in-out" id="progressBar"></div>
         </div>
+        <div class="text-xs text-center mt-2 text-gray-600 dark:text-gray-400" id="progressText">0% mastered</div>
 
         <div class="bg-gray-100 dark:bg-slate-700 rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 border-gray-200 dark:border-slate-600 transition-all duration-300 hover:border-[#667eea] dark:hover:border-[#475569]" id="card">
             <div class="text-[4em] font-bold text-gray-800 dark:text-gray-200 [.flipped_&]:text-[2em]" id="cardContent">А</div>
@@ -435,20 +436,48 @@
             return null;
         }
 
-        // Update statistics
-        function updateStats() {
+        // Calculate advanced statistics
+        function calculateStats() {
             const dueCards = cards.filter(card => card.isDue());
             const newCount = dueCards.filter(card => card.isNew).length;
             const learningCount = dueCards.filter(card => card.isLearning && !card.isNew).length;
             const reviewCount = dueCards.filter(card => !card.isNew && !card.isLearning).length;
+            
+            // Advanced metrics
+            const totalCards = cards.length;
+            const studiedCards = cards.filter(card => !card.isNew);
+            const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
+            const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+            const averageEase = studiedCards.length > 0 ? 
+                studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
+            const retentionRate = studiedCards.length > 0 ? 
+                (studiedCards.filter(card => card.easeFactor >= 2.5).length / studiedCards.length) * 100 : 100;
+            
+            return {
+                newCount,
+                learningCount, 
+                reviewCount,
+                totalCards,
+                studiedCards: studiedCards.length,
+                matureCards: matureCards.length,
+                youngCards: youngCards.length,
+                averageEase: Math.round(averageEase * 100) / 100,
+                retentionRate: Math.round(retentionRate),
+                masteryProgress: Math.round((matureCards.length / totalCards) * 100)
+            };
+        }
 
-            document.getElementById('newCards').textContent = newCount;
-            document.getElementById('learningCards').textContent = learningCount;
-            document.getElementById('reviewCards').textContent = reviewCount;
+        // Update statistics
+        function updateStats() {
+            const stats = calculateStats();
 
-            const totalStudied = cards.filter(card => !card.isNew).length;
-            const progress = (totalStudied / cards.length) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('newCards').textContent = stats.newCount;
+            document.getElementById('learningCards').textContent = stats.learningCount;
+            document.getElementById('reviewCards').textContent = stats.reviewCount;
+
+            // Update progress bar to show mastery progress
+            document.getElementById('progressBar').style.width = stats.masteryProgress + '%';
+            document.getElementById('progressText').textContent = `${stats.masteryProgress}% mastered`;
         }
 
         // Show next card
