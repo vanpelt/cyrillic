@@ -29,9 +29,83 @@
         }
     </script>
     <style>
+        /* CSS Custom Properties for Theme System */
+        :root {
+            /* Default Grayscale Light Theme */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-accent: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --accent-primary: #475569;
+            --accent-secondary: #64748b;
+            --border-color: #cbd5e1;
+            --shadow-color: rgba(15, 23, 42, 0.1);
+            --progress-bg: #e2e8f0;
+            --progress-fill: linear-gradient(90deg, #475569, #64748b);
+        }
+
+        .dark {
+            /* Grayscale Dark Theme */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --bg-accent: #475569;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent-primary: #cbd5e1;
+            --accent-secondary: #94a3b8;
+            --border-color: #475569;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --progress-bg: #475569;
+            --progress-fill: linear-gradient(90deg, #cbd5e1, #94a3b8);
+        }
+
+        .vibe {
+            /* Sci-Fi Colorful Theme */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-accent: #0f3460;
+            --text-primary: #00f5ff;
+            --text-secondary: #ff6b6b;
+            --text-muted: #4ecdc4;
+            --accent-primary: #ff6b6b;
+            --accent-secondary: #4ecdc4;
+            --border-color: #00f5ff;
+            --shadow-color: rgba(0, 245, 255, 0.2);
+            --progress-bg: #1a1a2e;
+            --progress-fill: linear-gradient(90deg, #ff6b6b, #4ecdc4, #00f5ff, #ff6b6b);
+        }
+
+        /* Animation for vibe theme */
+        .vibe {
+            animation: vibeGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes vibeGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(60deg); }
+        }
+
         /* Only keep styles that can't be replaced with Tailwind */
         .toggle.active .toggle-slider {
             transform: translateX(26px);
+        }
+
+        /* Progress bar animation for vibe theme */
+        .vibe #progressBar {
+            background: var(--progress-fill);
+            background-size: 200% 100%;
+            animation: progressShimmer 2s linear infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
