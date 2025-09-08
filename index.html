@@ -478,6 +478,17 @@
 
         // Theme management
         function applyTheme(themeValue) {
+            // Check for vibe mode
+            const isVibeMode = window.location.hash === '#vibe';
+            
+            if (isVibeMode) {
+                document.documentElement.classList.add('vibe');
+                document.documentElement.classList.remove('dark');
+                return;
+            } else {
+                document.documentElement.classList.remove('vibe');
+            }
+            
             if (themeValue === 'auto') {
                 // Use system preference
                 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -491,6 +502,11 @@
                 document.documentElement.classList.remove('dark');
             }
         }
+        
+        // Listen for hash changes to toggle vibe mode
+        window.addEventListener('hashchange', function() {
+            applyTheme(theme);
+        });
 
         function changeTheme() {
             const select = document.getElementById('themeSelect');
