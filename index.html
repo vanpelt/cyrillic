@@ -616,6 +616,13 @@
             document.getElementById('settingsScreen').classList.add('hidden');
         }
 
+        // Close settings when clicking outside the modal
+        document.getElementById('settingsScreen').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSettings();
+            }
+        });
+
         function toggleWords() {
             wordsMode = !wordsMode;
             saveSettings();
