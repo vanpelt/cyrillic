@@ -138,16 +138,16 @@
         </div>
         <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
-        <div class="bg-gray-100 dark:bg-slate-700 rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 border-gray-200 dark:border-slate-600 transition-all duration-300 hover:border-[#667eea] dark:hover:border-[#475569]" id="card">
-            <div class="text-[4em] font-bold text-gray-800 dark:text-gray-200 [.flipped_&]:text-[2em]" id="cardContent">А</div>
-            <div class="hidden mt-5 text-2xl text-gray-600 dark:text-gray-400 leading-[1.8]" id="cardAnswer">
+        <div class="rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
+            <div class="text-[4em] font-bold [.flipped_&]:text-[2em]" style="color: var(--text-primary);" id="cardContent">А</div>
+            <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
                 <strong>Latin:</strong> A<br>
                 <strong>Sound:</strong> /a/ (as in "father")
             </div>
         </div>
 
         <div class="flex gap-4 justify-center mt-8 flex-wrap max-[480px]:gap-2.5 max-[480px]:mt-5">
-            <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-cyan-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" id="showBtn" onclick="showAnswer()">Show Answer</button>
+            <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" style="background: var(--accent-secondary);" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
             <div class="hidden gap-4" id="gradeButtons">
                 <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(0)">Again</button>
