@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cyrillinki</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇷🇸</text></svg>">
     
@@ -103,8 +103,8 @@
         }
     </style>
 </head>
-<body class="font-sans min-h-screen flex justify-center items-center p-5 overflow-hidden touch-none transition-colors duration-300" style="background: var(--bg-primary);">
-    <div class="rounded-[20px] max-w-[500px] w-full p-10 text-center max-h-screen overflow-y-auto overscroll-none mt-8 safe-area-inset-top transition-colors duration-300" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
+<body class="font-sans min-h-screen flex justify-center items-center p-2 sm:p-5 overflow-hidden touch-none transition-colors duration-300" style="background: var(--bg-primary);">
+    <div class="rounded-[20px] max-w-[500px] w-full p-5 sm:p-10 text-center max-h-screen overflow-y-auto overscroll-none transition-colors duration-300" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
         <div class="relative mb-8">
             <h1 class="text-3xl text-center" style="color: var(--text-primary);">🇷🇸 Cyrillinki</h1>
             <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
@@ -133,22 +133,22 @@
         </div>
         <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
-        <div class="rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
-            <div class="text-[5em] font-bold [.flipped_&]:text-[2.5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
+        <div class="rounded-[15px] px-5 sm:px-10 py-10 sm:py-[60px] my-4 sm:my-8 min-h-[150px] sm:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
+            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
             <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
-                <strong>Latin:</strong> A<br>
-                <span class="text-base"><strong>Sound:</strong> /a/ (as in "father")</span>
+                <strong>A</strong><br>
+                <span class="text-sm">/a/ (as in "father")</span>
             </div>
         </div>
 
-        <div class="flex gap-4 justify-center mt-8 flex-wrap max-[480px]:gap-2.5 max-[480px]:mt-5">
-            <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" style="background: var(--accent-secondary);" id="showBtn" onclick="showAnswer()">Show Answer</button>
+        <div class="flex gap-2 sm:gap-4 justify-center mt-4 sm:mt-8 flex-wrap">
+            <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[10px] text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[80px] sm:min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: var(--accent-secondary);" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
-            <div class="hidden gap-4" id="gradeButtons">
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(0)">Again</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(1)">Hard</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(2)">Good</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(3)">Easy</button>
+            <div class="hidden gap-2 sm:gap-4 flex-wrap" id="gradeButtons">
+                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(0)">Again</button>
+                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(1)">Hard</button>
+                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(2)">Good</button>
+                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(3)">Easy</button>
             </div>
         </div>
 
@@ -618,7 +618,7 @@
                 const totalCards = cards.length;
                 const studiedCards = cards.filter(card => !card.isNew);
                 const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
-                const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+                const youngCards = studiedCards.filter(card => card.interval < 21);
                 const averageEase = studiedCards.length > 0 ? 
                     studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
                 const retentionRate = studiedCards.length > 0 ? 
@@ -648,7 +648,7 @@
             const totalCards = cards.length;
             const studiedCards = cards.filter(card => !card.isNew);
             const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
-            const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+            const youngCards = studiedCards.filter(card => card.interval < 21);
             const averageEase = studiedCards.length > 0 ? 
                 studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
             const retentionRate = studiedCards.length > 0 ? 
@@ -700,7 +700,7 @@
                 document.getElementById('showBtn').classList.add('hidden');
                 const gradeButtons = document.getElementById('gradeButtons');
                 gradeButtons.classList.add('hidden');
-                gradeButtons.classList.remove('flex', 'max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
+                gradeButtons.classList.remove('flex');
                 return;
             }
 
@@ -708,11 +708,11 @@
             
             let answerHtml;
             if (wordsMode) {
-                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
+                answerHtml = `<strong>${currentCard.data.latin}</strong><br>
                              <strong>Meaning:</strong> ${currentCard.data.meaning}`;
             } else {
-                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
-                             <strong>Sound:</strong> ${currentCard.data.sound}`;
+                answerHtml = `<strong>${currentCard.data.latin}</strong><br>
+                             <span class="text-sm">${currentCard.data.sound}</span>`;
             }
             
             document.getElementById('cardAnswer').innerHTML = answerHtml;
@@ -722,7 +722,7 @@
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.add('hidden');
-            gradeButtons.classList.remove('flex', 'max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
+            gradeButtons.classList.remove('flex');
             
             isShowingAnswer = false;
         }
@@ -735,8 +735,6 @@
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.remove('hidden');
             gradeButtons.classList.add('flex');
-            // Add mobile-specific classes when showing buttons
-            gradeButtons.classList.add('max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
             isShowingAnswer = true;
         }
 
