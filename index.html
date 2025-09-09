@@ -21,20 +21,20 @@
     <style>
         /* CSS Custom Properties for Theme System */
         :root {
-            /* Default Grayscale Light Theme */
-            --bg-primary: #f8fafc;
-            --bg-secondary: #f1f5f9;
+            /* Stark Black and White Light Theme */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
             --bg-card: #ffffff;
-            --bg-accent: #e2e8f0;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --accent-primary: #475569;
-            --accent-secondary: #64748b;
-            --border-color: #cbd5e1;
-            --shadow-color: rgba(15, 23, 42, 0.1);
-            --progress-bg: #e2e8f0;
-            --progress-fill: linear-gradient(90deg, #475569, #64748b);
+            --bg-accent: #f0f0f0;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #666666;
+            --accent-primary: #000000;
+            --accent-secondary: #333333;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --progress-bg: #e0e0e0;
+            --progress-fill: linear-gradient(90deg, #000000, #333333);
         }
 
         .dark {
@@ -695,9 +695,17 @@
             currentCard = getNextCard();
             
             if (!currentCard) {
-                document.getElementById('cardContent').textContent = '🎉 All done for now!';
+                document.getElementById('cardContent').textContent = '🎉';
                 document.getElementById('cardAnswer').classList.add('hidden');
-                document.getElementById('showBtn').classList.add('hidden');
+                document.getElementById('showBtn').innerHTML = 'Enable practice mode';
+                document.getElementById('showBtn').onclick = function() {
+                    practiceMode = true;
+                    saveSettings();
+                    updateSettingsUI();
+                    updateStats();
+                    showNextCard();
+                };
+                document.getElementById('showBtn').classList.remove('hidden');
                 const gradeButtons = document.getElementById('gradeButtons');
                 gradeButtons.classList.add('hidden');
                 gradeButtons.classList.remove('flex');
@@ -719,6 +727,9 @@
             document.getElementById('cardAnswer').classList.add('hidden');
             document.getElementById('card').classList.remove('flipped');
             
+            // Reset show button to original state
+            document.getElementById('showBtn').innerHTML = 'Show Answer';
+            document.getElementById('showBtn').onclick = showAnswer;
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.add('hidden');
