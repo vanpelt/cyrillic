@@ -700,7 +700,7 @@
                 document.getElementById('showBtn').classList.add('hidden');
                 const gradeButtons = document.getElementById('gradeButtons');
                 gradeButtons.classList.add('hidden');
-                gradeButtons.classList.remove('flex', 'max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
+                gradeButtons.classList.remove('flex');
                 return;
             }
 
@@ -722,7 +722,7 @@
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.add('hidden');
-            gradeButtons.classList.remove('flex', 'max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
+            gradeButtons.classList.remove('flex');
             
             isShowingAnswer = false;
         }
@@ -735,8 +735,6 @@
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.remove('hidden');
             gradeButtons.classList.add('flex');
-            // Add mobile-specific classes when showing buttons
-            gradeButtons.classList.add('max-[480px]:grid', 'max-[480px]:grid-cols-2', 'max-[480px]:gap-2.5', 'max-[480px]:w-full');
             isShowingAnswer = true;
         }
 
