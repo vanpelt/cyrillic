@@ -618,7 +618,7 @@
                 const totalCards = cards.length;
                 const studiedCards = cards.filter(card => !card.isNew);
                 const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
-                const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+                const youngCards = studiedCards.filter(card => card.interval < 21);
                 const averageEase = studiedCards.length > 0 ? 
                     studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
                 const retentionRate = studiedCards.length > 0 ? 
@@ -648,7 +648,7 @@
             const totalCards = cards.length;
             const studiedCards = cards.filter(card => !card.isNew);
             const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
-            const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+            const youngCards = studiedCards.filter(card => card.interval < 21);
             const averageEase = studiedCards.length > 0 ? 
                 studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
             const retentionRate = studiedCards.length > 0 ? 
