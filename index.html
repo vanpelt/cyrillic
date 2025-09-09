@@ -108,6 +108,7 @@
         <div class="relative mb-8">
             <h1 class="text-3xl text-center" style="color: var(--text-primary);">🇷🇸 Cyrillinki</h1>
             <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
+            <div class="text-xs text-center mt-2 font-medium hidden" style="color: var(--accent-secondary);" id="practiceModeIndicator">📚 Practice Mode Active</div>
         </div>
         
         <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
@@ -551,10 +552,13 @@
             }
             
             const practiceToggle = document.getElementById('practiceToggle');
+            const practiceModeIndicator = document.getElementById('practiceModeIndicator');
             if (practiceMode) {
                 practiceToggle.classList.add('active');
+                practiceModeIndicator.classList.remove('hidden');
             } else {
                 practiceToggle.classList.remove('active');
+                practiceModeIndicator.classList.add('hidden');
             }
             
             const themeSelect = document.getElementById('themeSelect');
