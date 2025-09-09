@@ -110,8 +110,8 @@
             <button class="absolute top-0 right-0 bg-transparent border-0 text-xl md:text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
         </div>
         
-        <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
-            <div class="flex justify-around p-5">
+        <div class="relative mb-6 md:mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
+            <div class="flex justify-around p-3 md:p-5">
                 <div class="text-center">
                     <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="newCards">0</div>
                     <div class="text-sm mt-1" style="color: var(--text-muted);">New</div>
@@ -130,24 +130,24 @@
                 <div class="h-full transition-[width] duration-300 ease-in-out" style="background: var(--progress-fill);" id="progressBar"></div>
             </div>
         </div>
-        <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
+        <div class="text-xs text-center -mt-4 md:-mt-6 mb-4 md:mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
-        <div class="rounded-[15px] px-10 py-[60px] my-8 min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
-            <div class="text-[5em] font-bold [.flipped_&]:text-[2.5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
-            <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
+        <div class="rounded-[15px] px-6 md:px-10 py-10 md:py-[60px] my-6 md:my-8 min-h-[150px] md:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
+            <div class="text-[3em] md:text-[5em] font-bold [.flipped_&]:text-[2em] md:[.flipped_&]:text-[2.5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
+            <div class="hidden mt-3 md:mt-5 text-lg md:text-2xl leading-[1.6] md:leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
                 <strong>Latin:</strong> A<br>
                 <span class="text-base"><strong>Sound:</strong> /a/ (as in "father")</span>
             </div>
         </div>
 
-        <div class="flex gap-4 justify-center mt-8 flex-wrap max-[480px]:gap-2.5 max-[480px]:mt-5">
-            <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" style="background: var(--accent-secondary);" id="showBtn" onclick="showAnswer()">Show Answer</button>
+        <div class="flex gap-3 md:gap-4 justify-center mt-6 md:mt-8 flex-wrap">
+            <button class="px-4 md:px-6 py-3 md:py-4 border-0 rounded-[10px] text-sm md:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[90px] md:min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: var(--accent-secondary);" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
-            <div class="hidden gap-4" id="gradeButtons">
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(0)">Again</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(1)">Hard</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(2)">Good</button>
-                <button class="px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] max-[480px]:px-4 max-[480px]:py-3 max-[480px]:text-sm max-[480px]:min-w-[70px] max-[480px]:flex-1" onclick="gradeCard(3)">Easy</button>
+            <div class="hidden gap-2 md:gap-3" id="gradeButtons">
+                <button class="px-3 md:px-4 py-2.5 md:py-3 border-0 rounded-[10px] text-xs md:text-sm font-semibold cursor-pointer transition-all duration-300 min-w-[60px] md:min-w-[80px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(0)">Again</button>
+                <button class="px-3 md:px-4 py-2.5 md:py-3 border-0 rounded-[10px] text-xs md:text-sm font-semibold cursor-pointer transition-all duration-300 min-w-[60px] md:min-w-[80px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(1)">Hard</button>
+                <button class="px-3 md:px-4 py-2.5 md:py-3 border-0 rounded-[10px] text-xs md:text-sm font-semibold cursor-pointer transition-all duration-300 min-w-[60px] md:min-w-[80px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(2)">Good</button>
+                <button class="px-3 md:px-4 py-2.5 md:py-3 border-0 rounded-[10px] text-xs md:text-sm font-semibold cursor-pointer transition-all duration-300 min-w-[60px] md:min-w-[80px] bg-blue-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(3)">Easy</button>
             </div>
         </div>
 
