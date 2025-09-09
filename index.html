@@ -136,8 +136,8 @@
         <div class="rounded-[15px] px-5 sm:px-10 py-10 sm:py-[60px] my-4 sm:my-8 min-h-[150px] sm:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
             <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
             <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
-                <strong>Latin:</strong> A<br>
-                <span class="text-xs">/a/ (as in "father")</span>
+                <strong>A</strong><br>
+                <span class="text-sm">/a/ (as in "father")</span>
             </div>
         </div>
 
@@ -708,11 +708,11 @@
             
             let answerHtml;
             if (wordsMode) {
-                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
+                answerHtml = `<strong>${currentCard.data.latin}</strong><br>
                              <strong>Meaning:</strong> ${currentCard.data.meaning}`;
             } else {
-                answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
-                             <span class="text-xs">${currentCard.data.sound}</span>`;
+                answerHtml = `<strong>${currentCard.data.latin}</strong><br>
+                             <span class="text-sm">${currentCard.data.sound}</span>`;
             }
             
             document.getElementById('cardAnswer').innerHTML = answerHtml;
