@@ -137,7 +137,7 @@
             <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
             <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
                 <strong>Latin:</strong> A<br>
-                <span class="text-sm"><strong>Sound:</strong> /a/ (as in "father")</span>
+                <span class="text-xs">/a/ (as in "father")</span>
             </div>
         </div>
 
@@ -712,7 +712,7 @@
                              <strong>Meaning:</strong> ${currentCard.data.meaning}`;
             } else {
                 answerHtml = `<strong>Latin:</strong> ${currentCard.data.latin}<br>
-                             <strong>Sound:</strong> ${currentCard.data.sound}`;
+                             <span class="text-xs">${currentCard.data.sound}</span>`;
             }
             
             document.getElementById('cardAnswer').innerHTML = answerHtml;
