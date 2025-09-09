@@ -185,6 +185,16 @@
                 </div>
             </div>
 
+            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
+                <div>
+                    <div class="font-medium" style="color: var(--text-primary);">Practice Mode</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review all cards without waiting for intervals</div>
+                </div>
+                <div class="relative w-[50px] h-6 rounded-full cursor-pointer transition-colors duration-300 toggle" style="background: var(--text-muted);" id="practiceToggle" onclick="togglePracticeMode()">
+                    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
+                </div>
+            </div>
+
             <!-- Detailed Statistics -->
             <div class="mb-6 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
                 <h3 class="font-medium mb-3" style="color: var(--text-primary);">Learning Statistics</h3>
@@ -468,6 +478,7 @@
         let currentCard = null;
         let isShowingAnswer = false;
         let wordsMode = false;
+        let practiceMode = false;
         let theme = 'auto';
 
         // Theme management
@@ -520,22 +531,30 @@
         function loadSettings() {
             const settings = JSON.parse(localStorage.getItem('serbianSettings') || '{}');
             wordsMode = settings.wordsMode || false;
+            practiceMode = settings.practiceMode || false;
             theme = settings.theme || 'auto';
             applyTheme(theme);
             updateSettingsUI();
         }
 
         function saveSettings() {
-            const settings = { wordsMode, theme };
+            const settings = { wordsMode, practiceMode, theme };
             localStorage.setItem('serbianSettings', JSON.stringify(settings));
         }
 
         function updateSettingsUI() {
-            const toggle = document.getElementById('wordsToggle');
+            const wordsToggle = document.getElementById('wordsToggle');
             if (wordsMode) {
-                toggle.classList.add('active');
+                wordsToggle.classList.add('active');
             } else {
-                toggle.classList.remove('active');
+                wordsToggle.classList.remove('active');
+            }
+            
+            const practiceToggle = document.getElementById('practiceToggle');
+            if (practiceMode) {
+                practiceToggle.classList.add('active');
+            } else {
+                practiceToggle.classList.remove('active');
             }
             
             const themeSelect = document.getElementById('themeSelect');
@@ -551,6 +570,21 @@
 
         // Get next card to study
         function getNextCard() {
+            // In practice mode, show all cards that have been studied at least once
+            if (practiceMode) {
+                const studiedCards = cards.filter(card => !card.isNew);
+                if (studiedCards.length > 0) {
+                    return studiedCards[Math.floor(Math.random() * studiedCards.length)];
+                }
+                // If no cards have been studied yet, fall back to new cards
+                const newCards = cards.filter(card => card.isNew);
+                if (newCards.length > 0) {
+                    return newCards[Math.floor(Math.random() * newCards.length)];
+                }
+                return null;
+            }
+            
+            // Normal mode: only show due cards
             const dueCards = cards.filter(card => card.isDue());
             const newCards = dueCards.filter(card => card.isNew);
             const learningCards = dueCards.filter(card => card.isLearning && !card.isNew);
@@ -570,6 +604,37 @@
 
         // Calculate advanced statistics
         function calculateStats() {
+            // In practice mode, show all cards as available
+            if (practiceMode) {
+                const newCount = cards.filter(card => card.isNew).length;
+                const learningCount = cards.filter(card => card.isLearning && !card.isNew).length;
+                const reviewCount = cards.filter(card => !card.isNew && !card.isLearning).length;
+                
+                // Continue with rest of function using all cards
+                const totalCards = cards.length;
+                const studiedCards = cards.filter(card => !card.isNew);
+                const matureCards = cards.filter(card => card.interval >= 21 && !card.isNew && !card.isLearning);
+                const youngCards = studiedCards.filter(card => card.interval < 21 && !card.isLearning);
+                const averageEase = studiedCards.length > 0 ? 
+                    studiedCards.reduce((sum, card) => sum + card.easeFactor, 0) / studiedCards.length : 2.5;
+                const retentionRate = studiedCards.length > 0 ? 
+                    (studiedCards.filter(card => card.easeFactor >= 2.5).length / studiedCards.length) * 100 : 100;
+                
+                return {
+                    newCount,
+                    learningCount, 
+                    reviewCount,
+                    totalCards,
+                    studiedCards: studiedCards.length,
+                    matureCards: matureCards.length,
+                    youngCards: youngCards.length,
+                    averageEase: Math.round(averageEase * 100) / 100,
+                    retentionRate: Math.round(retentionRate),
+                    masteryProgress: Math.round((matureCards.length / totalCards) * 100)
+                };
+            }
+            
+            // Normal mode: only count due cards
             const dueCards = cards.filter(card => card.isDue());
             const newCount = dueCards.filter(card => card.isNew).length;
             const learningCount = dueCards.filter(card => card.isLearning && !card.isNew).length;
@@ -712,6 +777,14 @@
             saveSettings();
             updateSettingsUI();
             initializeCards();
+            updateStats();
+            showNextCard();
+        }
+        
+        function togglePracticeMode() {
+            practiceMode = !practiceMode;
+            saveSettings();
+            updateSettingsUI();
             updateStats();
             showNextCard();
         }
