@@ -224,33 +224,33 @@
             <div class="text-sm text-center mt-3 font-medium hidden px-3 py-1 rounded-full animate-scale-in" style="color: var(--accent-secondary); background: var(--bg-accent);" id="practiceModeIndicator">📚 Practice Mode Active</div>
         </div>
         
-        <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
-            <div class="flex justify-around p-5">
+        <div class="relative mb-10 rounded-2xl transition-all duration-500 overflow-hidden hover-lift animate-slide-up" style="background: var(--bg-accent); box-shadow: var(--card-shadow);">
+            <div class="flex justify-around p-6">
                 <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="newCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">New</div>
+                    <div class="text-3xl font-bold text-gradient" id="newCards">0</div>
+                    <div class="text-sm mt-2 font-medium" style="color: var(--text-muted);">New</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="learningCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Learning</div>
+                    <div class="text-3xl font-bold text-gradient" id="learningCards">0</div>
+                    <div class="text-sm mt-2 font-medium" style="color: var(--text-muted);">Learning</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="reviewCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review</div>
+                    <div class="text-3xl font-bold text-gradient" id="reviewCards">0</div>
+                    <div class="text-sm mt-2 font-medium" style="color: var(--text-muted);">Review</div>
                 </div>
             </div>
-            <!-- Progress bar as bottom border -->
-            <div class="absolute bottom-0 left-0 w-full h-1" style="background: var(--progress-bg);">
-                <div class="h-full transition-[width] duration-300 ease-in-out" style="background: var(--progress-fill);" id="progressBar"></div>
+            <!-- Enhanced progress bar -->
+            <div class="absolute bottom-0 left-0 w-full h-2 rounded-b-2xl overflow-hidden" style="background: var(--progress-bg);">
+                <div class="h-full progress-bar transition-all duration-700 ease-out" style="background: var(--progress-fill);" id="progressBar"></div>
             </div>
         </div>
-        <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
+        <div class="text-sm text-center -mt-8 mb-8 font-medium animate-fade-in" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
-        <div class="rounded-[15px] px-5 sm:px-10 py-10 sm:py-[60px] my-4 sm:my-8 min-h-[150px] sm:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
-            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
-            <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
+        <div class="rounded-3xl px-6 sm:px-12 py-12 sm:py-16 my-6 sm:my-10 min-h-[200px] sm:min-h-[250px] flex flex-col items-center justify-center border-2 transition-all duration-500 hover-lift glass-card animate-scale-in" style="background: var(--bg-accent); border-color: var(--border-color); box-shadow: var(--card-shadow);" onmouseover="this.style.borderColor='var(--accent-secondary)'; this.style.boxShadow='var(--card-shadow-hover)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='var(--card-shadow)'" id="card">
+            <div class="card-content text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em] transition-all duration-400" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
+            <div class="hidden mt-6 text-2xl leading-[1.8] animate-fade-in" style="color: var(--text-secondary);" id="cardAnswer">
                 <strong>A</strong><br>
-                <span class="text-sm">/a/ (as in "father")</span>
+                <span class="text-lg font-medium" style="color: var(--text-muted);">/a/ (as in "father")</span>
             </div>
         </div>
 
