@@ -268,21 +268,21 @@
     </div>
 
     <!-- Settings Screen -->
-    <div class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-[1000] p-4" id="settingsScreen">
-        <div class="rounded-[15px] max-w-[400px] w-full transition-colors duration-300 max-h-[90vh] flex flex-col" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
-            <div class="p-8 pb-4">
-                <h2 class="text-2xl mb-6 text-center" style="color: var(--text-primary);">Settings</h2>
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex justify-center items-center z-[1000] p-4 animate-fade-in" id="settingsScreen">
+        <div class="rounded-3xl max-w-[420px] w-full transition-all duration-500 max-h-[90vh] flex flex-col animate-scale-in hover-lift" style="background: var(--bg-card); box-shadow: var(--card-shadow-hover);">
+            <div class="p-8 pb-6">
+                <h2 class="text-3xl font-bold mb-6 text-center text-gradient">Settings</h2>
             </div>
             
             <!-- Scrollable content -->
             <div class="flex-1 overflow-y-auto px-8">
             
-            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
+            <div class="flex justify-between items-center mb-6 p-5 rounded-2xl transition-all duration-300 hover-lift" style="background: var(--bg-accent); box-shadow: var(--card-shadow);">
                 <div>
-                    <div class="font-medium" style="color: var(--text-primary);">Theme</div>
+                    <div class="font-semibold text-lg" style="color: var(--text-primary);">Theme</div>
                     <div class="text-sm mt-1" style="color: var(--text-muted);">Choose your preferred color scheme</div>
                 </div>
-                <select class="rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors duration-300" style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); --tw-ring-color: var(--accent-primary);" id="themeSelect" onchange="changeTheme()">
+                <select class="rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-300 hover-lift" style="background: var(--bg-secondary); border: 2px solid var(--border-color); color: var(--text-primary); --tw-ring-color: var(--accent-secondary); --tw-ring-offset-color: var(--bg-card);" id="themeSelect" onchange="changeTheme()">
                     <option value="auto">Auto</option>
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
