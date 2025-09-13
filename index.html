@@ -218,10 +218,10 @@
 </head>
 <body class="font-sans min-h-screen flex justify-center items-center p-2 sm:p-5 overflow-hidden touch-none transition-all duration-500 ease-in-out" style="background: var(--bg-primary);">
     <div class="rounded-3xl max-w-[500px] w-full p-6 sm:p-12 text-center max-h-screen overflow-y-auto overscroll-none transition-all duration-500 ease-in-out hover-lift animate-fade-in" style="background: var(--bg-card); box-shadow: var(--card-shadow);">
-        <div class="relative mb-8">
-            <h1 class="text-3xl text-center" style="color: var(--text-primary);">🇷🇸 Cyrillinki</h1>
-            <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
-            <div class="text-xs text-center mt-2 font-medium hidden" style="color: var(--accent-secondary);" id="practiceModeIndicator">📚 Practice Mode Active</div>
+        <div class="relative mb-10 animate-slide-up">
+            <h1 class="text-4xl font-bold text-center tracking-tight" style="color: var(--text-primary);">🇷🇸 <span class="text-gradient">Cyrillinki</span></h1>
+            <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all duration-300 p-2 rounded-xl hover:scale-110 hover:opacity-80 hover-lift focus-visible" onclick="openSettings()" style="color: var(--text-muted);">⚙️</button>
+            <div class="text-sm text-center mt-3 font-medium hidden px-3 py-1 rounded-full animate-scale-in" style="color: var(--accent-secondary); background: var(--bg-accent);" id="practiceModeIndicator">📚 Practice Mode Active</div>
         </div>
         
         <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
