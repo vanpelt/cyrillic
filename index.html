@@ -254,14 +254,14 @@
             </div>
         </div>
 
-        <div class="flex gap-2 sm:gap-4 justify-center mt-4 sm:mt-8 flex-wrap">
-            <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[10px] text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[80px] sm:min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: #000000;" id="showBtn" onclick="showAnswer()">Show Answer</button>
-            
-            <div class="hidden gap-2 sm:gap-4 flex-wrap" id="gradeButtons">
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(0)">Again</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(1)">Hard</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(2)">Good</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(3)">Easy</button>
+        <div class="flex gap-3 sm:gap-4 justify-center mt-6 sm:mt-10 flex-wrap animate-slide-up">
+            <button class="btn-primary px-6 sm:px-8 py-4 sm:py-5 border-0 rounded-2xl text-sm sm:text-base font-semibold cursor-pointer min-w-[100px] sm:min-w-[140px] hover-lift focus-visible shadow-lg" id="showBtn" onclick="showAnswer()">Show Answer</button>
+
+            <div class="hidden gap-3 sm:gap-4 flex-wrap animate-fade-in" id="gradeButtons">
+                <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-xl text-xs sm:text-base font-semibold cursor-pointer min-w-[70px] sm:min-w-[100px] text-white hover-lift focus-visible transition-all duration-300" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="gradeCard(0)">Again</button>
+                <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-xl text-xs sm:text-base font-semibold cursor-pointer min-w-[70px] sm:min-w-[100px] text-white hover-lift focus-visible transition-all duration-300" style="background: linear-gradient(135deg, #f97316, #ea580c);" onclick="gradeCard(1)">Hard</button>
+                <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-xl text-xs sm:text-base font-semibold cursor-pointer min-w-[70px] sm:min-w-[100px] text-white hover-lift focus-visible transition-all duration-300" style="background: linear-gradient(135deg, #22c55e, #16a34a);" onclick="gradeCard(2)">Good</button>
+                <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-xl text-xs sm:text-base font-semibold cursor-pointer min-w-[70px] sm:min-w-[100px] text-white hover-lift focus-visible transition-all duration-300" style="background: linear-gradient(135deg, #a855f7, #9333ea);" onclick="gradeCard(3)">Easy</button>
             </div>
         </div>
 
