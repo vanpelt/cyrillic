@@ -134,7 +134,7 @@
         <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
 
         <div class="rounded-[15px] px-5 sm:px-10 py-10 sm:py-[60px] my-4 sm:my-8 min-h-[150px] sm:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
-            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif;" id="cardContent">А</div>
+            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em] break-all text-center leading-tight" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;" id="cardContent">А</div>
             <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
                 <strong>A</strong><br>
                 <span class="text-sm">/a/ (as in "father")</span>
@@ -693,7 +693,7 @@
         // Show next card
         function showNextCard() {
             currentCard = getNextCard();
-            
+
             if (!currentCard) {
                 document.getElementById('cardContent').textContent = '🎉';
                 document.getElementById('cardAnswer').classList.add('hidden');
@@ -712,7 +712,30 @@
                 return;
             }
 
-            document.getElementById('cardContent').textContent = currentCard.data.cyrillic;
+            const cardContent = document.getElementById('cardContent');
+            cardContent.textContent = currentCard.data.cyrillic;
+
+            // Adjust font size for words mode based on text length
+            if (wordsMode) {
+                const textLength = currentCard.data.cyrillic.length;
+                cardContent.className = cardContent.className.replace(/text-\[[^\]]+\]/g, '');
+
+                if (textLength <= 4) {
+                    cardContent.className += ' text-[7em] sm:text-[10em] [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]';
+                } else if (textLength <= 6) {
+                    cardContent.className += ' text-[5em] sm:text-[7em] [.flipped_&]:text-[3em] sm:[.flipped_&]:text-[4em]';
+                } else if (textLength <= 8) {
+                    cardContent.className += ' text-[4em] sm:text-[5.5em] [.flipped_&]:text-[2.5em] sm:[.flipped_&]:text-[3.5em]';
+                } else if (textLength <= 10) {
+                    cardContent.className += ' text-[3em] sm:text-[4.5em] [.flipped_&]:text-[2em] sm:[.flipped_&]:text-[3em]';
+                } else {
+                    cardContent.className += ' text-[2.5em] sm:text-[3.5em] [.flipped_&]:text-[1.8em] sm:[.flipped_&]:text-[2.5em]';
+                }
+            } else {
+                // Reset to original alphabet mode sizes
+                cardContent.className = cardContent.className.replace(/text-\[[^\]]+\]/g, '');
+                cardContent.className += ' text-[7em] sm:text-[10em] [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em]';
+            }
             
             let answerHtml;
             if (wordsMode) {
