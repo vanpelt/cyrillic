@@ -189,7 +189,7 @@
             <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
                 <div>
                     <div class="font-medium" style="color: var(--text-primary);">Practice Mode</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review all cards without waiting for intervals</div>
+                    <div class="text-sm mt-1" style="color: var(--text-muted);">Practice all cards randomly without interval restrictions</div>
                 </div>
                 <div class="relative w-[50px] h-6 rounded-full cursor-pointer transition-colors duration-300 toggle" style="background: var(--text-muted);" id="practiceToggle" onclick="togglePracticeMode()">
                     <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
@@ -574,16 +574,12 @@
 
         // Get next card to study
         function getNextCard() {
-            // In practice mode, show all cards that have been studied at least once
+            // In practice mode, show all cards randomly (both new and studied)
             if (practiceMode) {
-                const studiedCards = cards.filter(card => !card.isNew);
-                if (studiedCards.length > 0) {
-                    return studiedCards[Math.floor(Math.random() * studiedCards.length)];
-                }
-                // If no cards have been studied yet, fall back to new cards
-                const newCards = cards.filter(card => card.isNew);
-                if (newCards.length > 0) {
-                    return newCards[Math.floor(Math.random() * newCards.length)];
+                // Include all cards in practice mode, not just studied ones
+                // This prevents showing the same card repeatedly when few cards have been studied
+                if (cards.length > 0) {
+                    return cards[Math.floor(Math.random() * cards.length)];
                 }
                 return null;
             }
