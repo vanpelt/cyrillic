@@ -902,8 +902,8 @@
             document.getElementById('cardAnswer').classList.add('hidden');
             document.getElementById('card').classList.remove('flipped');
             
-            // Reset show button to original state
-            document.getElementById('showBtn').innerHTML = 'Show Answer';
+            // Reset show button to original state with keyboard hint
+            document.getElementById('showBtn').innerHTML = 'Show Answer <span class="kbd">Space</span>';
             document.getElementById('showBtn').onclick = showAnswer;
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
@@ -915,12 +915,25 @@
 
         // Show answer
         function showAnswer() {
-            document.getElementById('cardAnswer').classList.remove('hidden');
+            const cardAnswer = document.getElementById('cardAnswer');
+            cardAnswer.classList.remove('hidden');
+            cardAnswer.classList.add('fade-in');
             document.getElementById('card').classList.add('flipped');
             document.getElementById('showBtn').classList.add('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.remove('hidden');
             gradeButtons.classList.add('flex');
+
+            // Add keyboard hints to grade buttons
+            const buttons = gradeButtons.querySelectorAll('button');
+            const hints = ['1', '2', '3', '4'];
+            const texts = ['Again', 'Hard', 'Good', 'Easy'];
+            buttons.forEach((btn, i) => {
+                if (!btn.innerHTML.includes('kbd')) {
+                    btn.innerHTML = `${texts[i]} <span class="kbd">${hints[i]}</span>`;
+                }
+            });
+
             isShowingAnswer = true;
         }
 
@@ -950,7 +963,12 @@
         }
 
         function closeSettings() {
-            document.getElementById('settingsScreen').classList.add('hidden');
+            const settingsScreen = document.getElementById('settingsScreen');
+            const modal = settingsScreen.querySelector('.settings-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                settingsScreen.classList.add('hidden');
+            }, 200);
         }
 
         // Close settings when clicking outside the modal
