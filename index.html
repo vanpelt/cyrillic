@@ -650,7 +650,8 @@
                     interval: this.interval,
                     dueDate: this.dueDate.toISOString(),
                     isNew: this.isNew,
-                    isLearning: this.isLearning
+                    isLearning: this.isLearning,
+                    lastStudied: new Date().toISOString()
                 };
                 localStorage.setItem(storageKey, JSON.stringify(cards));
             }
@@ -659,7 +660,7 @@
                 const cards = JSON.parse(localStorage.getItem(storageKey) || '{}');
                 const card = new Card(data, id);
                 card.storageKey = storageKey;
-                
+
                 if (cards[id]) {
                     const saved = cards[id];
                     card.easeFactor = saved.easeFactor;
@@ -668,8 +669,9 @@
                     card.dueDate = new Date(saved.dueDate);
                     card.isNew = saved.isNew;
                     card.isLearning = saved.isLearning;
+                    card.lastStudied = saved.lastStudied ? new Date(saved.lastStudied) : null;
                 }
-                
+
                 return card;
             }
         }
@@ -681,6 +683,8 @@
         let wordsMode = false;
         let practiceMode = false;
         let theme = 'auto';
+        let lastSeenCards = new Set(); // Track recently seen cards
+        let lastSeenCleanup = Date.now(); // Track when to clean up old entries
 
         // Theme management
         function applyTheme(themeValue) {
@@ -772,23 +776,99 @@
             cards = dataSource.map((data, index) => Card.load(data, index, storageKey));
         }
 
+        // Clean up old entries from lastSeenCards (older than 5 minutes)
+        function cleanupLastSeen() {
+            const now = Date.now();
+            if (now - lastSeenCleanup > 60000) { // Clean up every minute
+                const fiveMinutesAgo = now - 5 * 60 * 1000;
+                for (const entry of lastSeenCards) {
+                    const [cardId, timestamp] = entry.split(':');
+                    if (parseInt(timestamp) < fiveMinutesAgo) {
+                        lastSeenCards.delete(entry);
+                    }
+                }
+                lastSeenCleanup = now;
+            }
+        }
+
+        // Filter out recently seen cards
+        function filterRecentlySeen(cardsList) {
+            cleanupLastSeen();
+            const now = Date.now();
+            const fiveMinutesAgo = now - 5 * 60 * 1000;
+
+            return cardsList.filter(card => {
+                for (const entry of lastSeenCards) {
+                    const [cardId, timestamp] = entry.split(':');
+                    if (parseInt(cardId) === card.id && parseInt(timestamp) > fiveMinutesAgo) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
+
         // Get next card to study
         function getNextCard() {
             // In practice mode, show all cards randomly (both new and studied)
             if (practiceMode) {
-                // Include all cards in practice mode, not just studied ones
-                // This prevents showing the same card repeatedly when few cards have been studied
-                if (cards.length > 0) {
-                    return cards[Math.floor(Math.random() * cards.length)];
+                let studiedCards = cards.filter(card => !card.isNew);
+
+                // Filter out recently seen cards first
+                let availableCards = filterRecentlySeen(studiedCards);
+
+                if (availableCards.length > 0) {
+                    return availableCards[Math.floor(Math.random() * availableCards.length)];
+                }
+
+                // If all studied cards were recently seen, fall back to any studied card
+                if (studiedCards.length > 0) {
+                    return studiedCards[Math.floor(Math.random() * studiedCards.length)];
+                }
+
+                // If no cards have been studied yet, fall back to new cards
+                const newCards = cards.filter(card => card.isNew);
+                if (newCards.length > 0) {
+                    return newCards[Math.floor(Math.random() * newCards.length)];
                 }
                 return null;
             }
-            
-            // Normal mode: only show due cards
+
+            // Normal mode: show due cards and ensure minimum daily cards
             const dueCards = cards.filter(card => card.isDue());
-            const newCards = dueCards.filter(card => card.isNew);
-            const learningCards = dueCards.filter(card => card.isLearning && !card.isNew);
-            const reviewCards = dueCards.filter(card => !card.isNew && !card.isLearning);
+            let newCards = dueCards.filter(card => card.isNew);
+            let learningCards = dueCards.filter(card => card.isLearning && !card.isNew);
+            let reviewCards = dueCards.filter(card => !card.isNew && !card.isLearning);
+
+            // If no cards are due, reintroduce some older cards for daily practice
+            if (dueCards.length === 0) {
+                const now = new Date();
+                const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+
+                // Find cards that haven't been studied in 3+ days
+                const oldCards = cards.filter(card => {
+                    if (card.isNew) return true; // Always include new cards
+                    if (!card.lastStudied) return true; // Include cards never studied
+                    return card.lastStudied < threeDaysAgo;
+                });
+
+                if (oldCards.length > 0) {
+                    // Limit to max 5 cards per day to avoid overwhelming
+                    const dailyCards = oldCards.slice(0, 5);
+
+                    // Categorize the reintroduced cards
+                    newCards = dailyCards.filter(card => card.isNew);
+                    const reintroducedCards = dailyCards.filter(card => !card.isNew);
+
+                    // Treat reintroduced cards as review cards
+                    reviewCards = reintroducedCards;
+                }
+            }
+
+            // Filter out recently seen cards
+            newCards = filterRecentlySeen(newCards);
+            learningCards = filterRecentlySeen(learningCards);
+            reviewCards = filterRecentlySeen(reviewCards);
 
             // Prioritize: learning cards, then new cards, then review cards
             if (learningCards.length > 0) {
@@ -985,6 +1065,9 @@
         function gradeCard(quality) {
             if (!isShowingAnswer) return;
 
+            // Add current card to recently seen list
+            const now = Date.now();
+            lastSeenCards.add(`${currentCard.id}:${now}`);
             // Add visual feedback to clicked button
             const buttons = document.querySelectorAll('#gradeButtons button');
             const clickedButton = buttons[quality];
