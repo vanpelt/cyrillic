@@ -19,75 +19,230 @@
         }
     </script>
     <style>
+        /* Import Inter font for professional typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
         /* CSS Custom Properties for Theme System */
         :root {
-            /* Stark Black and White Light Theme */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f5f5f5;
+            /* Professional Light Theme with Serbian accent colors */
+            --bg-primary: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+            --bg-secondary: #ffffff;
             --bg-card: #ffffff;
-            --bg-accent: #f0f0f0;
-            --text-primary: #000000;
-            --text-secondary: #333333;
-            --text-muted: #666666;
-            --accent-primary: #000000;
-            --accent-secondary: #333333;
-            --border-color: #e0e0e0;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --progress-bg: #e0e0e0;
-            --progress-fill: linear-gradient(90deg, #000000, #333333);
+            --bg-accent: rgba(248, 249, 250, 0.8);
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --accent-primary: #c41e3a; /* Serbian red */
+            --accent-secondary: #0056b3; /* Serbian blue */
+            --accent-tertiary: #6366f1; /* Playful purple */
+            --border-color: rgba(226, 232, 240, 0.8);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 6px 10px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+            --progress-bg: rgba(226, 232, 240, 0.4);
+            --progress-fill: linear-gradient(135deg, #c41e3a 0%, #0056b3 50%, #6366f1 100%);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         .dark {
-            /* True Black Dark Theme */
-            --bg-primary: #000000;
-            --bg-secondary: #1a1a1a;
-            --bg-card: #2a2a2a;
-            --bg-accent: #3a3a3a;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --text-muted: #999999;
-            --accent-primary: #ffffff;
-            --accent-secondary: #cccccc;
-            --border-color: #4a4a4a;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --progress-bg: #3a3a3a;
-            --progress-fill: linear-gradient(90deg, #ffffff, #cccccc);
+            /* Professional Dark Theme */
+            --bg-primary: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            --bg-secondary: #1f1f1f;
+            --bg-card: rgba(30, 30, 30, 0.9);
+            --bg-accent: rgba(40, 40, 40, 0.8);
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --text-muted: #a0aec0;
+            --accent-primary: #ef4444; /* Bright red */
+            --accent-secondary: #3b82f6; /* Bright blue */
+            --accent-tertiary: #8b5cf6; /* Purple */
+            --border-color: rgba(75, 85, 99, 0.3);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4), 0 6px 10px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.4);
+            --progress-bg: rgba(75, 85, 99, 0.3);
+            --progress-fill: linear-gradient(135deg, #ef4444 0%, #3b82f6 50%, #8b5cf6 100%);
+            --glass-bg: rgba(30, 30, 30, 0.7);
+            --glass-border: rgba(75, 85, 99, 0.2);
         }
 
         .vibe {
-            /* Sci-Fi Colorful Theme */
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #1a1a2e;
-            --bg-card: #16213e;
-            --bg-accent: #0f3460;
-            --text-primary: #00f5ff;
-            --text-secondary: #ff6b6b;
-            --text-muted: #4ecdc4;
-            --accent-primary: #ff6b6b;
-            --accent-secondary: #4ecdc4;
-            --border-color: #00f5ff;
-            --shadow-color: rgba(0, 245, 255, 0.2);
-            --progress-bg: #1a1a2e;
-            --progress-fill: linear-gradient(90deg, #ff6b6b, #4ecdc4, #00f5ff, #ff6b6b);
+            /* Cyberpunk Theme */
+            --bg-primary: linear-gradient(135deg, #0a0e27 0%, #151937 100%);
+            --bg-secondary: #1a1f3a;
+            --bg-card: rgba(26, 31, 58, 0.9);
+            --bg-accent: rgba(30, 36, 66, 0.8);
+            --text-primary: #00ffff;
+            --text-secondary: #ff00ff;
+            --text-muted: #00ff88;
+            --accent-primary: #ff0080;
+            --accent-secondary: #00ffff;
+            --accent-tertiary: #ffff00;
+            --border-color: rgba(0, 255, 255, 0.3);
+            --shadow-sm: 0 1px 3px rgba(0, 255, 255, 0.1), 0 1px 2px rgba(255, 0, 255, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 255, 255, 0.15), 0 2px 4px rgba(255, 0, 255, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 255, 255, 0.2), 0 6px 10px rgba(255, 0, 255, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 255, 255, 0.3), 0 10px 20px rgba(255, 0, 255, 0.2);
+            --progress-bg: rgba(0, 255, 255, 0.1);
+            --progress-fill: linear-gradient(135deg, #ff0080 0%, #00ffff 33%, #ffff00 66%, #ff00ff 100%);
+            --glass-bg: rgba(26, 31, 58, 0.7);
+            --glass-border: rgba(0, 255, 255, 0.2);
+        }
+
+        /* Global styles */
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Smooth transitions for all theme changes */
+        body, .card-container, .stats-container, .settings-modal {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Animation for vibe theme */
         .vibe {
-            animation: vibeGlow 3s ease-in-out infinite alternate;
+            animation: vibeGlow 4s ease-in-out infinite alternate;
         }
 
         @keyframes vibeGlow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(60deg); }
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(180deg) brightness(1.1); }
+            100% { filter: hue-rotate(360deg) brightness(1); }
         }
 
-        /* Only keep styles that can't be replaced with Tailwind */
-        .toggle.active .toggle-slider {
-            transform: translateX(26px);
+        /* Card entrance animation */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
+        .card-content {
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Button hover effects */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Glassmorphism effect for cards */
+        .glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Progress bar pulse animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .progress-animated {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Card flip animation */
+        .card-flip {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Smooth fade animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Keyboard shortcut hints */
+        .kbd {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--text-muted);
+            background: var(--bg-accent);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 1px 0 var(--border-color);
+            font-family: monospace;
+        }
+
+        /* Toggle switch styles */
+        .toggle {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .toggle:hover::before {
+            transform: translateX(100%);
+        }
+
+        .toggle.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
         .toggle.active {
-            background: var(--accent-primary) !important;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+        }
+
+        .toggle-slider {
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toggle.active .toggle-slider {
+            box-shadow: var(--shadow-md);
         }
 
         /* Progress bar animation for vibe theme */
@@ -101,145 +256,190 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
+        /* Settings modal slide animation */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .settings-modal.show {
+            animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 640px) {
+            .btn {
+                min-height: 48px; /* Better touch targets */
+            }
+
+            .toggle {
+                min-width: 52px;
+                min-height: 28px;
+            }
+
+            .kbd {
+                display: none; /* Hide keyboard hints on mobile */
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
-<body class="font-sans min-h-screen flex justify-center items-center p-2 sm:p-5 overflow-hidden touch-none transition-colors duration-300" style="background: var(--bg-primary);">
-    <div class="rounded-[20px] max-w-[500px] w-full p-5 sm:p-10 text-center max-h-screen overflow-y-auto overscroll-none transition-colors duration-300" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
-        <div class="relative mb-8">
-            <h1 class="text-3xl text-center" style="color: var(--text-primary);">🇷🇸 Cyrillinki</h1>
-            <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all p-1 hover:scale-125 hover:opacity-70" onclick="openSettings()">⚙️</button>
-            <div class="text-xs text-center mt-2 font-medium hidden" style="color: var(--accent-secondary);" id="practiceModeIndicator">📚 Practice Mode Active</div>
+<body class="font-sans min-h-screen flex justify-center items-center p-4 sm:p-6 overflow-hidden touch-none transition-all duration-500" style="background: var(--bg-primary);">
+    <div class="rounded-[24px] max-w-[520px] w-full p-6 sm:p-10 text-center max-h-screen overflow-y-auto overscroll-none transition-all duration-500 glass" style="background: var(--glass-bg); box-shadow: var(--shadow-xl); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
+        <div class="relative mb-10">
+            <h1 class="text-4xl font-bold text-center tracking-tight" style="color: var(--text-primary); text-shadow: 0 2px 4px rgba(0,0,0,0.1);">🇷🇸 Cyrillinki</h1>
+            <p class="text-sm mt-2 opacity-80" style="color: var(--text-muted);">Master Serbian Cyrillic with Spaced Repetition</p>
+            <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all duration-300 p-2 rounded-full hover:scale-110" style="background: var(--bg-accent); box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='scale(1.1) rotate(90deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'" onclick="openSettings()">⚙️</button>
+            <div class="text-xs text-center mt-3 font-semibold px-3 py-1 rounded-full inline-block hidden" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white;" id="practiceModeIndicator">📚 Practice Mode Active</div>
         </div>
         
-        <div class="relative mb-8 rounded-[10px] transition-colors duration-300 overflow-hidden" style="background: var(--bg-accent);">
-            <div class="flex justify-around p-5">
-                <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="newCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">New</div>
+        <div class="relative mb-10 rounded-[16px] transition-all duration-500 overflow-hidden stats-container" style="background: var(--bg-accent); box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
+            <div class="flex justify-around p-6">
+                <div class="text-center transition-all duration-300 hover:scale-105">
+                    <div class="text-3xl font-bold mb-1" style="color: var(--accent-primary);" id="newCards">0</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider opacity-80" style="color: var(--text-muted);">New</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="learningCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Learning</div>
+                <div class="text-center transition-all duration-300 hover:scale-105">
+                    <div class="text-3xl font-bold mb-1" style="color: var(--accent-secondary);" id="learningCards">0</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider opacity-80" style="color: var(--text-muted);">Learning</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold" style="color: var(--accent-primary);" id="reviewCards">0</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review</div>
+                <div class="text-center transition-all duration-300 hover:scale-105">
+                    <div class="text-3xl font-bold mb-1" style="color: var(--accent-tertiary);" id="reviewCards">0</div>
+                    <div class="text-xs font-semibold uppercase tracking-wider opacity-80" style="color: var(--text-muted);">Review</div>
                 </div>
             </div>
-            <!-- Progress bar as bottom border -->
-            <div class="absolute bottom-0 left-0 w-full h-1" style="background: var(--progress-bg);">
-                <div class="h-full transition-[width] duration-300 ease-in-out" style="background: var(--progress-fill);" id="progressBar"></div>
-            </div>
-        </div>
-        <div class="text-xs text-center -mt-6 mb-6" style="color: var(--text-muted);" id="progressText">0% mastered</div>
-
-        <div class="rounded-[15px] px-5 sm:px-10 py-10 sm:py-[60px] my-4 sm:my-8 min-h-[150px] sm:min-h-[200px] flex flex-col items-center justify-center border-2 transition-all duration-300" style="background: var(--bg-accent); border-color: var(--border-color);" onmouseover="this.style.borderColor='var(--accent-primary)'" onmouseout="this.style.borderColor='var(--border-color)'" id="card">
-            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em] break-all text-center leading-tight" style="color: var(--text-primary); font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', Georgia, serif; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;" id="cardContent">А</div>
-            <div class="hidden mt-5 text-2xl leading-[1.8]" style="color: var(--text-secondary);" id="cardAnswer">
-                <strong>A</strong><br>
-                <span class="text-sm">/a/ (as in "father")</span>
+            <!-- Progress bar -->
+            <div class="relative h-2" style="background: var(--progress-bg);">
+                <div class="h-full transition-all duration-700 ease-out progress-animated rounded-r" style="background: var(--progress-fill);" id="progressBar"></div>
             </div>
         </div>
+        <div class="text-sm text-center -mt-8 mb-8 font-semibold" style="color: var(--text-secondary);" id="progressText">0% mastered</div>
 
-        <div class="flex gap-2 sm:gap-4 justify-center mt-4 sm:mt-8 flex-wrap">
-            <button class="px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[10px] text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[80px] sm:min-w-[100px] text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: #000000;" id="showBtn" onclick="showAnswer()">Show Answer</button>
+        <div class="rounded-[20px] px-6 sm:px-12 py-12 sm:py-16 my-6 sm:my-10 min-h-[180px] sm:min-h-[240px] flex flex-col items-center justify-center transition-all duration-500 card-container card-content" style="background: linear-gradient(135deg, var(--bg-accent), var(--bg-secondary)); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); position: relative; overflow: hidden;" id="card">
+            <!-- Decorative gradient overlay -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%); pointer-events: none;"></div>
+            <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em] break-all text-center leading-tight transition-all duration-500 relative z-10" style="color: var(--text-primary); font-family: 'Georgia', 'Times New Roman', serif; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; text-shadow: 0 2px 8px rgba(0,0,0,0.1);" id="cardContent">А</div>
+            <div class="hidden mt-6 text-2xl leading-[1.8] relative z-10" style="color: var(--text-secondary);" id="cardAnswer">
+                <strong class="font-semibold">A</strong><br>
+                <span class="text-sm opacity-90">/a/ (as in "father")</span>
+            </div>
+        </div>
+
+        <div class="flex gap-3 sm:gap-4 justify-center mt-6 sm:mt-10 flex-wrap">
+            <button class="btn px-6 sm:px-8 py-3.5 sm:py-4 border-0 rounded-[12px] text-sm sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[100px] sm:min-w-[120px] text-white transform hover:-translate-y-1" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); box-shadow: var(--shadow-md);" id="showBtn" onclick="showAnswer()">Show Answer</button>
             
-            <div class="hidden gap-2 sm:gap-4 flex-wrap" id="gradeButtons">
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-red-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(0)">Again</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-orange-500 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(1)">Hard</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-green-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(2)">Good</button>
-                <button class="px-3 sm:px-6 py-2.5 sm:py-4 border-0 rounded-[10px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[60px] sm:min-w-[100px] bg-purple-600 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" onclick="gradeCard(3)">Easy</button>
+            <div class="hidden gap-3 sm:gap-4 flex-wrap" id="gradeButtons">
+                <button class="btn px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[12px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[70px] sm:min-w-[100px] text-white transform hover:-translate-y-1" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: var(--shadow-md);" onclick="gradeCard(0)">Again</button>
+                <button class="btn px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[12px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[70px] sm:min-w-[100px] text-white transform hover:-translate-y-1" style="background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: var(--shadow-md);" onclick="gradeCard(1)">Hard</button>
+                <button class="btn px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[12px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[70px] sm:min-w-[100px] text-white transform hover:-translate-y-1" style="background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: var(--shadow-md);" onclick="gradeCard(2)">Good</button>
+                <button class="btn px-4 sm:px-6 py-3 sm:py-4 border-0 rounded-[12px] text-xs sm:text-base font-semibold cursor-pointer transition-all duration-300 min-w-[70px] sm:min-w-[100px] text-white transform hover:-translate-y-1" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: var(--shadow-md);" onclick="gradeCard(3)">Easy</button>
             </div>
         </div>
 
     </div>
 
     <!-- Settings Screen -->
-    <div class="fixed inset-0 bg-black/50 hidden flex justify-center items-center z-[1000] p-4" id="settingsScreen">
-        <div class="rounded-[15px] max-w-[400px] w-full transition-colors duration-300 max-h-[90vh] flex flex-col" style="background: var(--bg-card); box-shadow: 0 20px 40px var(--shadow-color);">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex justify-center items-center z-[1000] p-4 transition-all duration-300" id="settingsScreen">
+        <div class="rounded-[24px] max-w-[420px] w-full transition-all duration-500 max-h-[90vh] flex flex-col settings-modal glass" style="background: var(--glass-bg); box-shadow: var(--shadow-xl); border: 1px solid var(--glass-border); backdrop-filter: blur(20px);">
             <div class="p-8 pb-4">
-                <h2 class="text-2xl mb-6 text-center" style="color: var(--text-primary);">Settings</h2>
+                <h2 class="text-2xl font-bold mb-2 text-center" style="color: var(--text-primary);">Settings</h2>
+                <p class="text-sm text-center opacity-70" style="color: var(--text-muted);">Customize your learning experience</p>
             </div>
             
             <!-- Scrollable content -->
             <div class="flex-1 overflow-y-auto px-8">
             
-            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
+            <div class="flex justify-between items-center mb-5 p-5 rounded-[16px] transition-all duration-300 hover:scale-[1.02]" style="background: var(--bg-accent); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
                 <div>
-                    <div class="font-medium" style="color: var(--text-primary);">Theme</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Choose your preferred color scheme</div>
+                    <div class="font-semibold" style="color: var(--text-primary);">Theme</div>
+                    <div class="text-xs mt-1 opacity-80" style="color: var(--text-muted);">Choose your preferred color scheme</div>
                 </div>
-                <select class="rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 transition-colors duration-300" style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); --tw-ring-color: var(--accent-primary);" id="themeSelect" onchange="changeTheme()">
-                    <option value="auto">Auto</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
+                <select class="rounded-[10px] px-4 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 transition-all duration-300 cursor-pointer" style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); box-shadow: var(--shadow-sm); --tw-ring-color: var(--accent-primary);" id="themeSelect" onchange="changeTheme()">
+                    <option value="auto">🌓 Auto</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
                 </select>
             </div>
             
-            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
-                <div>
-                    <div class="font-medium" style="color: var(--text-primary);">Words Mode</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Show common Serbian words instead of individual characters</div>
+            <div class="flex justify-between items-center mb-5 p-5 rounded-[16px] transition-all duration-300 hover:scale-[1.02]" style="background: var(--bg-accent); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+                <div class="flex-1 mr-4">
+                    <div class="font-semibold" style="color: var(--text-primary);">Words Mode</div>
+                    <div class="text-xs mt-1 opacity-80" style="color: var(--text-muted);">Learn common Serbian words instead of individual letters</div>
                 </div>
-                <div class="relative w-[50px] h-6 rounded-full cursor-pointer transition-colors duration-300 toggle" style="background: var(--text-muted);" id="wordsToggle" onclick="toggleWords()">
-                    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
+                <div class="relative w-[52px] h-[28px] rounded-full cursor-pointer transition-all duration-300 toggle" style="background: linear-gradient(135deg, #cbd5e0, #a0aec0);" id="wordsToggle" onclick="toggleWords()">
+                    <div class="absolute top-[3px] left-[3px] w-[22px] h-[22px] bg-white rounded-full transition-all duration-300 toggle-slider"></div>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center mb-5 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
-                <div>
-                    <div class="font-medium" style="color: var(--text-primary);">Practice Mode</div>
-                    <div class="text-sm mt-1" style="color: var(--text-muted);">Review all cards without waiting for intervals</div>
+            <div class="flex justify-between items-center mb-5 p-5 rounded-[16px] transition-all duration-300 hover:scale-[1.02]" style="background: var(--bg-accent); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+                <div class="flex-1 mr-4">
+                    <div class="font-semibold" style="color: var(--text-primary);">Practice Mode</div>
+                    <div class="text-xs mt-1 opacity-80" style="color: var(--text-muted);">Review all cards without waiting for intervals</div>
                 </div>
-                <div class="relative w-[50px] h-6 rounded-full cursor-pointer transition-colors duration-300 toggle" style="background: var(--text-muted);" id="practiceToggle" onclick="togglePracticeMode()">
-                    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 toggle-slider"></div>
+                <div class="relative w-[52px] h-[28px] rounded-full cursor-pointer transition-all duration-300 toggle" style="background: linear-gradient(135deg, #cbd5e0, #a0aec0);" id="practiceToggle" onclick="togglePracticeMode()">
+                    <div class="absolute top-[3px] left-[3px] w-[22px] h-[22px] bg-white rounded-full transition-all duration-300 toggle-slider"></div>
                 </div>
             </div>
 
             <!-- Detailed Statistics -->
-            <div class="mb-6 p-4 rounded-[10px] transition-colors duration-300" style="background: var(--bg-accent);">
-                <h3 class="font-medium mb-3" style="color: var(--text-primary);">Learning Statistics</h3>
+            <div class="mb-6 p-5 rounded-[16px] transition-all duration-300" style="background: var(--bg-accent); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+                <h3 class="font-semibold mb-4 text-sm uppercase tracking-wider" style="color: var(--text-primary);">📊 Learning Statistics</h3>
                 <div class="space-y-3 text-sm">
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Total Cards:</span>
-                        <span class="font-medium" style="color: var(--text-primary);" id="statsTotalCards">0</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Total Cards</span>
+                        <span class="font-semibold" style="color: var(--text-primary);" id="statsTotalCards">0</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Studied Cards:</span>
-                        <span class="font-medium" style="color: var(--text-primary);" id="statsStudiedCards">0</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Studied Cards</span>
+                        <span class="font-semibold" style="color: var(--text-primary);" id="statsStudiedCards">0</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Mature Cards (21+ days):</span>
-                        <span class="font-medium" style="color: var(--accent-secondary);" id="statsMatureCards">0</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Mature Cards (21+ days)</span>
+                        <span class="font-semibold" style="color: var(--accent-secondary);" id="statsMatureCards">0</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Young Cards (&lt;21 days):</span>
-                        <span class="font-medium" style="color: var(--accent-primary);" id="statsYoungCards">0</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Young Cards (&lt;21 days)</span>
+                        <span class="font-semibold" style="color: var(--accent-primary);" id="statsYoungCards">0</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Average Ease Factor:</span>
-                        <span class="font-medium" style="color: var(--text-primary);" id="statsAverageEase">2.50</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Average Ease Factor</span>
+                        <span class="font-semibold" style="color: var(--text-primary);" id="statsAverageEase">2.50</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span style="color: var(--text-muted);">Retention Rate:</span>
-                        <span class="font-medium" style="color: var(--accent-secondary);" id="statsRetentionRate">100%</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg transition-all duration-200 hover:bg-black/5 dark:hover:bg-white/5">
+                        <span style="color: var(--text-muted);">Retention Rate</span>
+                        <span class="font-semibold" style="color: var(--accent-secondary);" id="statsRetentionRate">100%</span>
                     </div>
-                    <div class="flex justify-between pt-2 mt-2" style="border-top: 1px solid var(--border-color);">
-                        <span class="font-medium" style="color: var(--text-muted);">Mastery Progress:</span>
-                        <span class="font-bold" style="color: var(--accent-primary);" id="statsMasteryProgress">0%</span>
+                    <div class="flex justify-between items-center p-3 mt-3 rounded-lg" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); opacity: 0.1;">
+                        <span class="font-semibold" style="color: var(--text-primary); opacity: 1;">🏆 Mastery Progress</span>
+                        <span class="font-bold text-lg" style="color: var(--accent-primary); opacity: 1;" id="statsMasteryProgress">0%</span>
                     </div>
                 </div>
             </div>
             
             <!-- Reset Progress Button -->
             <div class="px-8 pb-4">
-                <button class="w-full text-white text-sm px-5 py-3 border-0 rounded-[10px] font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: #dc2626;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'" onclick="resetProgress()">Reset All Progress</button>
+                <button class="btn w-full text-white text-sm px-5 py-3 border-0 rounded-[12px] font-semibold cursor-pointer transition-all duration-300 transform hover:scale-[1.02]" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: var(--shadow-md);" onclick="resetProgress()">⚠️ Reset All Progress</button>
             </div>
             </div>
 
             <!-- Fixed Done Button -->
             <div class="p-8 pt-4" style="border-top: 1px solid var(--border-color);">
-                <button class="w-full px-6 py-4 border-0 rounded-[10px] text-base font-semibold cursor-pointer transition-all duration-300 text-white hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)]" style="background: #000000;" onclick="closeSettings()">Done</button>
+                <button class="btn w-full px-6 py-4 border-0 rounded-[12px] text-base font-semibold cursor-pointer transition-all duration-300 text-white transform hover:scale-[1.02]" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); box-shadow: var(--shadow-md);" onclick="closeSettings()">✓ Done</button>
             </div>
         </div>
     </div>
@@ -610,7 +810,7 @@
 
         // Get next card to study
         function getNextCard() {
-            // In practice mode, show all cards that have been studied at least once
+            // In practice mode, show all cards randomly (both new and studied)
             if (practiceMode) {
                 let studiedCards = cards.filter(card => !card.isNew);
 
@@ -826,8 +1026,8 @@
             document.getElementById('cardAnswer').classList.add('hidden');
             document.getElementById('card').classList.remove('flipped');
             
-            // Reset show button to original state
-            document.getElementById('showBtn').innerHTML = 'Show Answer';
+            // Reset show button to original state with keyboard hint
+            document.getElementById('showBtn').innerHTML = 'Show Answer <span class="kbd">Space</span>';
             document.getElementById('showBtn').onclick = showAnswer;
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
@@ -839,12 +1039,25 @@
 
         // Show answer
         function showAnswer() {
-            document.getElementById('cardAnswer').classList.remove('hidden');
+            const cardAnswer = document.getElementById('cardAnswer');
+            cardAnswer.classList.remove('hidden');
+            cardAnswer.classList.add('fade-in');
             document.getElementById('card').classList.add('flipped');
             document.getElementById('showBtn').classList.add('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.remove('hidden');
             gradeButtons.classList.add('flex');
+
+            // Add keyboard hints to grade buttons
+            const buttons = gradeButtons.querySelectorAll('button');
+            const hints = ['1', '2', '3', '4'];
+            const texts = ['Again', 'Hard', 'Good', 'Easy'];
+            buttons.forEach((btn, i) => {
+                if (!btn.innerHTML.includes('kbd')) {
+                    btn.innerHTML = `${texts[i]} <span class="kbd">${hints[i]}</span>`;
+                }
+            });
+
             isShowingAnswer = true;
         }
 
@@ -855,6 +1068,15 @@
             // Add current card to recently seen list
             const now = Date.now();
             lastSeenCards.add(`${currentCard.id}:${now}`);
+            // Add visual feedback to clicked button
+            const buttons = document.querySelectorAll('#gradeButtons button');
+            const clickedButton = buttons[quality];
+            if (clickedButton) {
+                clickedButton.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    clickedButton.style.transform = '';
+                }, 150);
+            }
 
             currentCard.grade(quality);
             updateStats();
@@ -878,7 +1100,12 @@
         }
 
         function closeSettings() {
-            document.getElementById('settingsScreen').classList.add('hidden');
+            const settingsScreen = document.getElementById('settingsScreen');
+            const modal = settingsScreen.querySelector('.settings-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                settingsScreen.classList.add('hidden');
+            }, 200);
         }
 
         // Close settings when clicking outside the modal
