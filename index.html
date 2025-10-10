@@ -101,6 +101,23 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
+        /* Toast notification */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            z-index: 2000;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="font-sans min-h-screen flex justify-center items-center p-2 sm:p-5 overflow-hidden touch-none transition-colors duration-300" style="background: var(--bg-primary);">
@@ -243,6 +260,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="px-6 py-3 rounded-full text-sm font-semibold text-white" style="background: var(--accent-primary); box-shadow: 0 10px 30px var(--shadow-color);"></div>
 
     <script>
         // Serbian Cyrillic alphabet data
@@ -782,10 +802,31 @@
             isShowingAnswer = true;
         }
 
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
         // Grade card
         function gradeCard(quality) {
             if (!isShowingAnswer) return;
-            
+
+            // Sassy feedback messages based on quality
+            const messages = {
+                0: ["Don't sweat it!", "We all stumble!", "Round 2, let's go!", "You'll get it next time!", "Mistakes = Learning!"],
+                1: ["Keep pushing!", "Almost there!", "You got this!", "Getting warmer!", "Progress over perfection!"],
+                2: ["Nice work!", "You're cooking!", "Solid!", "Keep it up!", "That's what I'm talking about!"],
+                3: ["Show off! 😎", "Crushing it! 🔥", "Too easy for you!", "Absolute legend!", "You're unstoppable!"]
+            };
+
+            const randomMessage = messages[quality][Math.floor(Math.random() * messages[quality].length)];
+            showToast(randomMessage);
+
             currentCard.grade(quality);
             updateStats();
             showNextCard();
