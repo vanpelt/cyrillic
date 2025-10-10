@@ -696,8 +696,18 @@
 
             if (!currentCard) {
                 document.getElementById('cardContent').textContent = '🎉';
-                document.getElementById('cardAnswer').classList.add('hidden');
-                document.getElementById('showBtn').innerHTML = 'Enable practice mode';
+                const sassyMessages = [
+                    "You crushed it! 💪",
+                    "All done for now! 🎊",
+                    "Look at you go! 🌟",
+                    "Nailed it! 🔥",
+                    "You're on fire! 🚀"
+                ];
+                const randomMessage = sassyMessages[Math.floor(Math.random() * sassyMessages.length)];
+                document.getElementById('cardAnswer').innerHTML = `<strong style="color: var(--text-primary);">${randomMessage}</strong><br><span style="color: var(--text-muted);">No more cards due right now. Come back later, or...</span>`;
+                document.getElementById('cardAnswer').classList.remove('hidden');
+                document.getElementById('card').classList.add('flipped');
+                document.getElementById('showBtn').innerHTML = 'Keep Grinding 🔥';
                 document.getElementById('showBtn').onclick = function() {
                     practiceMode = true;
                     saveSettings();
@@ -751,7 +761,7 @@
             document.getElementById('card').classList.remove('flipped');
             
             // Reset show button to original state
-            document.getElementById('showBtn').innerHTML = 'Show Answer';
+            document.getElementById('showBtn').innerHTML = 'Reveal the Mystery ✨';
             document.getElementById('showBtn').onclick = showAnswer;
             document.getElementById('showBtn').classList.remove('hidden');
             const gradeButtons = document.getElementById('gradeButtons');
