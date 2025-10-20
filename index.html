@@ -13,6 +13,7 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23667eea%22 rx=%2220%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22>🇷🇸</text></svg>">
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class'
@@ -297,13 +298,124 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -100px) rotate(90deg); }
+            50% { transform: translate(200px, 100px) rotate(180deg); }
+            75% { transform: translate(-100px, 50px) rotate(270deg); }
+        }
+
+        /* Bounce animation for cards */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                transform: scale(1.05) translateY(0);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* Shimmer effect for primary buttons */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .btn-primary {
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* Celebration shake */
+        @keyframes celebrate {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-5deg); }
+            20%, 40%, 60%, 80% { transform: rotate(5deg); }
+        }
+
+        .celebrate {
+            animation: celebrate 0.5s ease-in-out;
+        }
+
+        /* Streak flame animation */
+        @keyframes flame {
+            0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
+            50% { transform: scale(1.1) translateY(-2px); opacity: 0.8; }
+        }
+
+        .flame-animation {
+            animation: flame 1s ease-in-out infinite;
+        }
+
+        /* Success pulse */
+        @keyframes successPulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .success-pulse {
+            animation: successPulse 1.5s ease-out;
+        }
     </style>
 </head>
 <body class="font-sans min-h-screen flex justify-center items-center p-4 sm:p-6 overflow-hidden touch-none transition-all duration-500" style="background: var(--bg-primary);">
-    <div class="rounded-[24px] max-w-[520px] w-full p-6 sm:p-10 text-center max-h-screen overflow-y-auto overscroll-none transition-all duration-500 glass" style="background: var(--glass-bg); box-shadow: var(--shadow-xl); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
+    <!-- Floating particles background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="rounded-[24px] max-w-[520px] w-full p-6 sm:p-10 text-center max-h-screen overflow-y-auto overscroll-none transition-all duration-500 glass relative z-10" style="background: var(--glass-bg); box-shadow: var(--shadow-xl); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
         <div class="relative mb-10">
             <h1 class="text-4xl font-bold text-center tracking-tight" style="color: var(--text-primary); text-shadow: 0 2px 4px rgba(0,0,0,0.1);">🇷🇸 Cyrillinki</h1>
             <p class="text-sm mt-2 opacity-80" style="color: var(--text-muted);">Master Serbian Cyrillic with Spaced Repetition</p>
+
+            <!-- Streak Counter -->
+            <div class="flex justify-center items-center gap-2 mt-3">
+                <div class="text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1.5 transition-all duration-300 hover:scale-105" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; box-shadow: var(--shadow-sm);" id="streakDisplay">
+                    <span class="flame-animation">🔥</span>
+                    <span id="streakDays">0</span>
+                    <span>day streak</span>
+                </div>
+            </div>
+
             <button class="absolute top-0 right-0 bg-transparent border-0 text-2xl cursor-pointer transition-all duration-300 p-2 rounded-full hover:scale-110" style="background: var(--bg-accent); box-shadow: var(--shadow-sm);" onmouseover="this.style.transform='scale(1.1) rotate(90deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'" onclick="openSettings()">⚙️</button>
             <div class="text-xs text-center mt-3 font-semibold px-3 py-1 rounded-full inline-block hidden" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white;" id="practiceModeIndicator">📚 Practice Mode Active</div>
         </div>
@@ -330,7 +442,12 @@
         </div>
         <div class="text-sm text-center -mt-8 mb-8 font-semibold" style="color: var(--text-secondary);" id="progressText">0% mastered</div>
 
-        <div class="rounded-[20px] px-6 sm:px-12 py-12 sm:py-16 my-6 sm:my-10 min-h-[180px] sm:min-h-[240px] flex flex-col items-center justify-center transition-all duration-500 card-container card-content" style="background: linear-gradient(135deg, var(--bg-accent), var(--bg-secondary)); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); position: relative; overflow: hidden;" id="card">
+        <!-- Motivational Message -->
+        <div class="mb-6 px-4 py-2 rounded-lg text-sm font-medium italic fade-in" style="color: var(--text-muted); background: var(--bg-accent); border-left: 3px solid var(--accent-tertiary);" id="motivationalMessage">
+            Let's learn something amazing today!
+        </div>
+
+        <div class="rounded-[20px] px-6 sm:px-12 py-12 sm:py-16 my-6 sm:my-10 min-h-[180px] sm:min-h-[240px] flex flex-col items-center justify-center transition-all duration-500 card-container card-content bounce-in" style="background: linear-gradient(135deg, var(--bg-accent), var(--bg-secondary)); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); position: relative; overflow: hidden;" id="card">
             <!-- Decorative gradient overlay -->
             <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%); pointer-events: none;"></div>
             <div class="text-[7em] sm:text-[10em] font-bold [.flipped_&]:text-[4em] sm:[.flipped_&]:text-[5em] break-all text-center leading-tight transition-all duration-500 relative z-10" style="color: var(--text-primary); font-family: 'Georgia', 'Times New Roman', serif; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; text-shadow: 0 2px 8px rgba(0,0,0,0.1);" id="cardContent">А</div>
@@ -685,6 +802,26 @@
         let theme = 'auto';
         let lastSeenCards = new Set(); // Track recently seen cards
         let lastSeenCleanup = Date.now(); // Track when to clean up old entries
+        let streakData = { days: 0, lastStudyDate: null };
+
+        // Motivational messages
+        const motivationalMessages = [
+            "You're doing amazing! Keep it up! 🌟",
+            "Every card brings you closer to mastery! 💪",
+            "Learning is a journey, not a race! 🚀",
+            "You're making excellent progress! ⭐",
+            "Consistency is key - you're nailing it! 🔥",
+            "Your dedication is inspiring! 🎯",
+            "Small steps lead to big achievements! 🏆",
+            "You're becoming a Cyrillic master! 👑",
+            "Great job staying focused! 💎",
+            "Every review strengthens your memory! 🧠",
+            "You're on fire today! 🔥",
+            "Knowledge is power - keep going! ⚡",
+            "Your hard work is paying off! 🌈",
+            "Believe in yourself - you've got this! 💫",
+            "Learning languages opens new worlds! 🌍"
+        ];
 
         // Theme management
         function applyTheme(themeValue) {
@@ -731,6 +868,75 @@
                 applyTheme('auto');
             }
         });
+
+        // Streak management
+        function loadStreak() {
+            const saved = JSON.parse(localStorage.getItem('serbianStreak') || '{}');
+            streakData = {
+                days: saved.days || 0,
+                lastStudyDate: saved.lastStudyDate ? new Date(saved.lastStudyDate) : null
+            };
+            updateStreakDisplay();
+        }
+
+        function updateStreak() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (!streakData.lastStudyDate) {
+                // First time studying
+                streakData.days = 1;
+                streakData.lastStudyDate = today;
+            } else {
+                const lastStudy = new Date(streakData.lastStudyDate);
+                lastStudy.setHours(0, 0, 0, 0);
+                const diffDays = Math.floor((today - lastStudy) / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 0) {
+                    // Already studied today
+                    return;
+                } else if (diffDays === 1) {
+                    // Consecutive day
+                    streakData.days++;
+                    streakData.lastStudyDate = today;
+
+                    // Celebrate streak milestone
+                    if (streakData.days % 7 === 0) {
+                        triggerConfetti();
+                        showMotivationalMessage(`🎉 Amazing! ${streakData.days} day streak! 🎉`);
+                    }
+                } else {
+                    // Streak broken
+                    streakData.days = 1;
+                    streakData.lastStudyDate = today;
+                }
+            }
+
+            localStorage.setItem('serbianStreak', JSON.stringify({
+                days: streakData.days,
+                lastStudyDate: streakData.lastStudyDate.toISOString()
+            }));
+            updateStreakDisplay();
+        }
+
+        function updateStreakDisplay() {
+            const streakDays = document.getElementById('streakDays');
+            const streakDisplay = document.getElementById('streakDisplay');
+
+            if (streakDays) {
+                streakDays.textContent = streakData.days;
+
+                // Update streak text (singular/plural)
+                const streakText = streakData.days === 1 ? 'day streak' : 'day streak';
+                streakDays.nextElementSibling.textContent = streakText;
+
+                // Add celebration class for milestones
+                if (streakData.days >= 7) {
+                    streakDisplay.classList.add('celebrate');
+                    setTimeout(() => streakDisplay.classList.remove('celebrate'), 500);
+                }
+            }
+        }
 
         // Settings management
         function loadSettings() {
@@ -966,14 +1172,62 @@
             document.getElementById('statsMasteryProgress').textContent = stats.masteryProgress + '%';
         }
 
+        // Motivational message functions
+        function showMotivationalMessage(message = null) {
+            const messageEl = document.getElementById('motivationalMessage');
+            if (!messageEl) return;
+
+            if (!message) {
+                message = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            }
+
+            messageEl.textContent = message;
+            messageEl.classList.remove('fade-in');
+            void messageEl.offsetWidth; // Trigger reflow
+            messageEl.classList.add('fade-in');
+        }
+
+        // Confetti celebration
+        function triggerConfetti() {
+            if (typeof confetti !== 'undefined') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#c41e3a', '#0056b3', '#6366f1', '#f97316', '#22c55e']
+                });
+            }
+        }
+
+        // Initialize floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+
+            // Create 15 floating particles
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
         // Show next card
         function showNextCard() {
             currentCard = getNextCard();
 
             if (!currentCard) {
+                // All cards completed - celebration time!
+                triggerConfetti();
+                showMotivationalMessage("🎊 Fantastic! All cards reviewed! You're amazing! 🎊");
+
                 document.getElementById('cardContent').textContent = '🎉';
                 document.getElementById('cardAnswer').classList.add('hidden');
-                document.getElementById('showBtn').innerHTML = 'Enable practice mode';
+                document.getElementById('showBtn').innerHTML = '✨ Enable Practice Mode';
                 document.getElementById('showBtn').onclick = function() {
                     practiceMode = true;
                     saveSettings();
@@ -986,6 +1240,11 @@
                 gradeButtons.classList.add('hidden');
                 gradeButtons.classList.remove('flex');
                 return;
+            }
+
+            // Show a new motivational message every 5 cards
+            if (Math.random() < 0.2) {
+                showMotivationalMessage();
             }
 
             const cardContent = document.getElementById('cardContent');
@@ -1024,8 +1283,14 @@
             
             document.getElementById('cardAnswer').innerHTML = answerHtml;
             document.getElementById('cardAnswer').classList.add('hidden');
-            document.getElementById('card').classList.remove('flipped');
-            
+            const card = document.getElementById('card');
+            card.classList.remove('flipped');
+
+            // Add bounce animation
+            card.classList.remove('bounce-in');
+            void card.offsetWidth; // Trigger reflow
+            card.classList.add('bounce-in');
+
             // Reset show button to original state with keyboard hint
             document.getElementById('showBtn').innerHTML = 'Show Answer <span class="kbd">Space</span>';
             document.getElementById('showBtn').onclick = showAnswer;
@@ -1033,7 +1298,7 @@
             const gradeButtons = document.getElementById('gradeButtons');
             gradeButtons.classList.add('hidden');
             gradeButtons.classList.remove('flex');
-            
+
             isShowingAnswer = false;
         }
 
@@ -1068,15 +1333,29 @@
             // Add current card to recently seen list
             const now = Date.now();
             lastSeenCards.add(`${currentCard.id}:${now}`);
+
             // Add visual feedback to clicked button
             const buttons = document.querySelectorAll('#gradeButtons button');
             const clickedButton = buttons[quality];
             if (clickedButton) {
                 clickedButton.style.transform = 'scale(0.95)';
+                clickedButton.classList.add('success-pulse');
                 setTimeout(() => {
                     clickedButton.style.transform = '';
+                    clickedButton.classList.remove('success-pulse');
                 }, 150);
             }
+
+            // Celebrate good performance
+            if (quality >= 2) { // Good or Easy
+                if (quality === 3 && Math.random() < 0.3) {
+                    // 30% chance of confetti on Easy
+                    triggerConfetti();
+                }
+            }
+
+            // Update streak on first card of the day
+            updateStreak();
 
             currentCard.grade(quality);
             updateStats();
@@ -1134,9 +1413,12 @@
 
         // Initialize app
         loadSettings();
+        loadStreak();
         initializeCards();
         updateStats();
         showNextCard();
+        createParticles();
+        showMotivationalMessage();
 
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
